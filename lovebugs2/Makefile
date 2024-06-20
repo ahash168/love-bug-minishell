@@ -1,0 +1,52 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
+#    Updated: 2024/06/20 11:55:31 by ahashem          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	=	minishell
+
+LIBFT	=	libft/ft_isprint.c libft/ft_putchar_fd.c libft/ft_strjoin.c \
+			libft/ft_strtrim.c libft/ft_atoi.c libft/ft_itoa.c \
+			libft/ft_putendl_fd.c libft/ft_strlcat.c libft/ft_substr.c \
+			libft/ft_bzero.c libft/ft_putnbr_fd.c libft/ft_strlcpy.c \
+			libft/ft_tolower.c libft/ft_calloc.c  libft/ft_memchr.c \
+			libft/ft_putstr_fd.c libft/ft_strlen.c libft/ft_toupper.c \
+			libft/ft_isalnum.c libft/ft_memcmp.c libft/ft_split.c \
+			libft/ft_strmapi.c libft/ft_isalpha.c libft/ft_memcpy.c \
+			libft/ft_strchr.c libft/ft_strncmp.c libft/ft_isascii.c \
+			libft/ft_memmove.c libft/ft_strdup.c libft/ft_strnstr.c \
+			libft/ft_isdigit.c libft/ft_memset.c libft/ft_striteri.c \
+			libft/ft_strrchr.c
+
+SRCC	=	main.c arr_utils.c error.c
+
+SRC 	= 	$(LIBFT) $(addprefix srcs/, $(SRCC))
+
+OBJ		=	$(SRC:.c=.o)
+
+CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address -g3
+
+LRLFLAG =	-lreadline
+
+all		:	$(NAME)
+
+$(NAME)	:	$(OBJ) minishell.h
+			cc $(CFLAGS) $(LRLFLAG) $(OBJ) -o $(NAME)
+
+clean	:
+			rm -rf $(OBJ)
+
+fclean	:	clean
+			rm -rf $(NAME)
+
+re		:	fclean all
+
+.PHONY	:	all clean fclean re
+
