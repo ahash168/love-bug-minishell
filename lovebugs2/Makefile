@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
+#    By: bgordag <bgordag@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/06/20 11:55:31 by ahashem          ###   ########.fr        #
+#    Updated: 2024/06/20 14:21:48 by bgordag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,11 @@ LIBFT	=	libft/ft_isprint.c libft/ft_putchar_fd.c libft/ft_strjoin.c \
 			libft/ft_isdigit.c libft/ft_memset.c libft/ft_striteri.c \
 			libft/ft_strrchr.c
 
-SRCC	=	main.c arr_utils.c error.c
+BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
 
-SRC 	= 	$(LIBFT) $(addprefix srcs/, $(SRCC))
+SRCC	=	main.c arr_utils.c error.c builtins.c
+
+SRC 	= 	$(LIBFT) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
 
 OBJ		=	$(SRC:.c=.o)
 

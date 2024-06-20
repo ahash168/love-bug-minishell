@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgordag <bgordag@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/20 14:24:15 by bgordag          ###   ########.fr       */
+/*   Created: 2024/06/20 14:13:25 by bgordag           #+#    #+#             */
+/*   Updated: 2024/06/20 14:45:53 by bgordag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-# include "./libft/libft.h"
-# include "./builtins/builtins.h"
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -29,14 +28,8 @@
 # include <limits.h>
 # include <ctype.h>
 
-char	**arrcopy(char **arr);
-int		arrlen(char **arr);
-
-char	**freeer(char **arr);
-void	error_message(int n);
-void	errorer(void *ptr, int dimension, int n);
-
-int		builtin_input(char *input);
-void	exec_builtin(char *input, char **env);
+int		ft_echo(char *input);
+int		ft_env(char **our_env);
+int		ft_pwd(void);
 
 #endif
