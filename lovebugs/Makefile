@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/06/21 15:13:26 by ahashem          ###   ########.fr        #
+#    Updated: 2024/06/22 13:44:31 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT	=	libft/ft_isprint.c libft/ft_putchar_fd.c libft/ft_strjoin.c \
 			libft/ft_strchr.c libft/ft_strncmp.c libft/ft_isascii.c \
 			libft/ft_memmove.c libft/ft_strdup.c libft/ft_strnstr.c \
 			libft/ft_isdigit.c libft/ft_memset.c libft/ft_striteri.c \
-			libft/ft_strrchr.c
+			libft/ft_strrchr.c libft/ft_realloc.c
 
 BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
 

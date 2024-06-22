@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:02:43 by bgordag           #+#    #+#             */
-/*   Updated: 2024/06/22 12:18:12 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/06/22 12:25:39 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	builtin_input(char *input)
 	return (builtin);
 }
 
-int	exec_builtin(char **input, char **env)
+int	exec_builtin(char **input, t_env *env)
 {
+	(void) env;
 	if (ft_strncmp(input[0], "echo", 4) == 0)
 		ft_echo(input);
 	// else if (ft_strncmp(input[0], "cd", 2) == 0)
@@ -37,8 +38,8 @@ int	exec_builtin(char **input, char **env)
 	// 	ft_export();
 	// else if (ft_strncmp(input[0], "unset", 5) == 0)
 	// 	ft_unset();
-	else if (ft_strncmp(input[0], "env", 3) == 0)
-		ft_env(env);
+	// else if (ft_strncmp(input[0], "env", 3) == 0)
+	// 	ft_env(env);
 	// else if (ft_strncmp(input[0], "exit", 4) == 0)
 	// 	ft_exit();
 	else

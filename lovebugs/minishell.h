@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/22 12:18:00 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/06/22 12:24:05 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	error_message(int n);
 void	errorer(void *ptr, int dimension, int n);
 
 int		builtin_input(char *input);
-int		exec_builtin(char **input, char **env);
+int		exec_builtin(char **input, t_env *env);
 
 int		line_count(char *map_str);
 int		ft_strset(char strc, char *set);
