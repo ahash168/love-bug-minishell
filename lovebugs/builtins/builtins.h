@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/22 12:18:00 by ahashem          ###   ########.fr       */
+/*   Created: 2024/06/20 14:13:25 by bgordag           #+#    #+#             */
+/*   Updated: 2024/06/21 13:55:25 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-# include "./libft/libft.h"
-# include "./builtins/builtins.h"
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -29,26 +28,12 @@
 # include <limits.h>
 # include <ctype.h>
 
+#ifndef MAX_PATH
+# define MAX_PATH 256
+#endif
 
-typedef struct s_env
-{
-	char			*var;
-	char			*value;
-	struct s_env	*next;
-}			t_env;
-
-char	**arrcopy(char **arr);
-int		arrlen(char **arr);
-
-char	**freeer(char **arr);
-void	error_message(int n);
-void	errorer(void *ptr, int dimension, int n);
-
-int		builtin_input(char *input);
-int		exec_builtin(char **input, char **env);
-
-int		line_count(char *map_str);
-int		ft_strset(char strc, char *set);
-int		strchar_count(char *str, char c);
+int		ft_echo(char **input);
+int		ft_env(char **our_env);
+int		ft_pwd(void);
 
 #endif
