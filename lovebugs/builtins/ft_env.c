@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:14 by bgordag           #+#    #+#             */
-/*   Updated: 2024/06/22 12:25:18 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/06/23 23:46:27 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	ft_env(t_env *our_env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (our_env[i])
-// 		printf("%s\n", our_env[i++]);
-// 	return (0);
-// }
+int	ft_env(t_env *my_env)
+{
+	t_env *current;
+	current = my_env;
+	while (current)
+	{
+		printf("%s=%s\n", current->var, current->value);
+		current = current->next;
+	}
+	return (0);
+}
