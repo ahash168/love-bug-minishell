@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:18 by bgordag           #+#    #+#             */
-/*   Updated: 2024/06/23 21:38:15 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/02 09:58:48 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@
 // 		return (0);
 // 	if (get_var(env, input[1]))
 // 	{
-		
 // 	}
 // 	return (0);
 // }

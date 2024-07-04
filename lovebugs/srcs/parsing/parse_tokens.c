@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void parse_tokens(t_token *tokens)
+void	parse_tokens(t_token *tokens)
 {
 	t_token	*current;
 
@@ -22,13 +22,15 @@ void parse_tokens(t_token *tokens)
 		if (current->type == PIPE)
 		{
 			current = current->next;
-			if (!current) {
+			if (!current)
+			{
 				printf("error: no next after pipe\n");
 				exit(1);
 			}
 			if (current->type == SPACES)
 				current = current->next;
-			if (!current || current->type == PIPE) {
+			if (!current || current->type == PIPE)
+			{
 				printf("error: wrong after space after pipe\n");
 				exit(1);
 			}
@@ -37,13 +39,15 @@ void parse_tokens(t_token *tokens)
 		else if (current->type == REDIR)
 		{
 			current = current->next;
-			if (!current) {
+			if (!current)
+			{
 				printf("error: no next after redirection\n");
 				exit(1);
 			}
 			if (current->type == SPACES)
 				current = current->next;
-			if (!current || current->type == REDIR || current->type == PIPE) {
+			if (!current || current->type == REDIR || current->type == PIPE)
+			{
 				printf("error: wrong after space after redirection\n");
 				exit(1);
 			}

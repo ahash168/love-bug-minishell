@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/01 16:46:12 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:37:13 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_tokens(t_token *head)
 	t_token	*current = head;
 	char	*type = NULL;
 
-	while (current != NULL) 
+	while (current != NULL)
 	{
 		if (current->type == SPACES)
 			type = ft_strdup("[SPACES]  ");
@@ -27,8 +27,6 @@ void	print_tokens(t_token *head)
 			type = ft_strdup("[CMD]     ");
 		if (current->type == PATH)
 			type = ft_strdup("[PATH]    ");
-		if (current->type == FLAG)
-			type = ft_strdup("[FLAG]    ");
 		if (current->type == ARG)
 			type = ft_strdup("[ARG]     ");
 		if (current->type == PIPE)
@@ -127,10 +125,8 @@ t_token	*tokenizer(char *input)
 			last_token->next = current_token;
 		last_token = current_token;
 		i += ft_strlen(current_token->str);
-		// print_tokens(current_token);
 	}
 	return (tokens_list);
-	//print_linked_list_by_type(tokens_list);
 }
 
 void	quote_checker(char *input)
@@ -157,8 +153,7 @@ void	quote_checker(char *input)
 	}
 }
 
-
-void quote_remover(t_token *tokens)
+void	quote_remover(t_token *tokens)
 {
 	int		i;
 	int		j;
@@ -170,41 +165,22 @@ void quote_remover(t_token *tokens)
 	{
 		if (current->type == SINGLE || current->type == DOUBLE)
 		{
-			new_str = ft_calloc(ft_strlen(current->str) - 2, sizeof(char)); // Allocate enough space
+			new_str = ft_calloc(ft_strlen(current->str) - 2, sizeof(char));
 			i = 0;
 			j = 0;
-			while (current->str[i]) 
+			while (current->str[i])
 			{
-				if ((current->str[i] != '\'' && current->type == SINGLE) 
+				if ((current->str[i] != '\'' && current->type == SINGLE)
 					|| (current->str[i] != '\"' && current->type == DOUBLE))
 					new_str[j++] = current->str[i];
 				i++;
 			}
 			new_str[j] = '\0';
-			free(current->str);  // Free the old string
+			free(current->str);
 			current->str = new_str;
 		}
 		current = current->next;
 	}
-}
-
-int	parsing(char *input)
-{
-	t_token	*tokens;
-
-	tokens = NULL;
-	quote_checker(input);
-	tokens = tokenizer(input);
-	printf("\nfirst\n");
-	print_tokens(tokens);
-	parse_tokens(tokens);
-	quote_remover(tokens);
-	printf("\nsecond\n");
-	print_tokens(tokens);
-	rename_tokens(tokens);
-	printf("\nthird\n");
-	print_tokens(tokens);
-	return (0);
 }
 
 // int	parsing(char *input)
@@ -214,17 +190,40 @@ int	parsing(char *input)
 // 	tokens = NULL;
 // 	quote_checker(input);
 // 	tokens = tokenizer(input);
-// 	// printf("\nfirst\n");
-// 	// print_tokens(tokens);
+// 	printf("\nfirst\n");
+// 	print_tokens(tokens);
 // 	parse_tokens(tokens);
 // 	quote_remover(tokens);
-// 	// printf("\nsecond\n");
-// 	// print_tokens(tokens);
+// 	printf("\nsecond\n");
+// 	print_tokens(tokens);
 // 	rename_tokens(tokens);
-// 	// printf("\nthird\n");
+// 	printf("\nthird\n");
+// 	print_tokens(tokens);
+// 	// join_tokens(tokens);
+// 	// printf("\nfourth\n");
 // 	// print_tokens(tokens);
 // 	return (0);
 // }
+
+int	parsing(char *input)
+{
+	t_token	*tokens;
+
+	tokens = NULL;
+	quote_checker(input);
+	tokens = tokenizer(input);
+	// printf("\nfirst\n");
+	// print_tokens(tokens);
+	parse_tokens(tokens);
+	quote_remover(tokens);
+	// printf("\nsecond\n");
+	// print_tokens(tokens);
+	rename_tokens(tokens);
+	// printf("\nthird\n");
+	// print_tokens(tokens);
+	init_cmds(tokens);
+	return (0);
+}
 
 // t_parsed_commands parse(char *line)
 // {

@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/29 15:06:22 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:30:59 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ enum e_type
 	WORD,
 	CMD,
 	PATH,
-	FLAG,
 	ARG,
 	PIPE,
 	REDIR,
@@ -48,8 +47,9 @@ enum e_type
 typedef struct s_cmd
 {
 	char			**cmd;
-	
-	struct s_token	*next;
+	int				in;
+	int				out;
+	struct s_cmd	*next;
 }					t_cmd;
 
 typedef struct s_token
@@ -67,13 +67,13 @@ typedef struct s_env
 	struct s_env	*next;
 }			t_env;
 
-typedef struct s_parsed_commands
-{
-	char ***commands; // string of commands (commands are arrays of strings)
-	int commands_length;
-	int input_file;
-	int output_file;
-} t_parsed_commands;
+// typedef struct s_parsed_commands
+// {
+// 	char ***commands; // string of commands (commands are arrays of strings)
+// 	int commands_length;
+// 	int input_file;
+// 	int output_file;
+// } t_parsed_commands;
 
 char	**arrcopy(char **arr);
 int		arrlen(char **arr);
@@ -89,13 +89,16 @@ int		line_count(char *map_str);
 int		ft_strset(char strc, char *set);
 int		strchar_count(char *str, char c);
 
-t_parsed_commands	parse(char *input);
+// t_parsed_commands	parse(char *input);
 
-void	execute_commands(t_parsed_commands parsed_commands, t_env *my_env);
-void	execute(char **command, int input_file, int output_file, t_env *my_env);
+// void	execute_commands(t_parsed_commands parsed_commands, t_env *my_env);
+// void	execute(char **command, int input_file, int output_file, t_env *my_env);
 
 int		parsing(char *input);
 void	parse_tokens(t_token *tokens);
 void	rename_tokens(t_token *tokens);
+void	join_tokens(t_token *tokens);
+
+void	init_cmds(t_token *tokens);
 
 #endif

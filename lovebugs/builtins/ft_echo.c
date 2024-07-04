@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:11 by bgordag           #+#    #+#             */
-/*   Updated: 2024/06/21 13:40:05 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/02 09:58:22 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	print_echo(char **input, int i, int check)
 int	ft_echo(char **input)
 {
 	int		i;
+	int		j;
 	int		check;
 
 	i = 1;
 	check = 1;
 	while (input[i] && ft_strncmp(input[i], "-n", 2) == 0)
 	{
-		int j = 2;
+		j = 2;
 		while (input[i][j] == 'n')
 			j++;
 		if (input[i][j] == '\0')
@@ -43,7 +44,7 @@ int	ft_echo(char **input)
 			i++;
 		}
 		else
-			break;
+			break ;
 	}
 	print_echo(input, i, check);
 	freeer(input);

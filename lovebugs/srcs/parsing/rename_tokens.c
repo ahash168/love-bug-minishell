@@ -17,43 +17,44 @@ void	cmdarg_tokens(t_token *tokens)
 	t_token	*current;
 
 	current = tokens;
-	while (current)
-	{
-		if (current->type == REDIR)
-		{
-			if (current->next->type == SPACES)
-				current = current->next;
-			if (!ft_strncmp(current->str, "<<", 2))
-				current->next->type = DELIM;
-			else
-				current->next->type = PATH;
-		}
+	while (current && current->type != WORD)
 		current = current->next;
+	if (current && current->type == WORD)
+		current->type = CMD;
+	while (current && current->next && current->next->type != PIPE)
+	{
+		current = current->next;
+		if (current->type == WORD)
+			current->type = ARG;
 	}
 }
 
 void	path_tokens(t_token *tokens)
 {
 	t_token	*current;
+	char	*redir_str;
 
 	current = tokens;
 	while (current)
 	{
 		if (current->type == REDIR)
 		{
-			if (current->next->type == SPACES)
+			redir_str = current->str;
+			if (current && current->next->type == SPACES)
 				current = current->next;
-			if (!ft_strncmp(current->str, "<<", 2))
-				current->next->type = DELIM;
-			else
-				current->next->type = PATH;
+			if (current)
+			{
+				if (ft_strncmp(redir_str, "<<", 2) == 0)
+					current->next->type = DELIM;
+				else
+					current->next->type = PATH;
+			}
 		}
 		current = current->next;
 	}
 }
 
-
-int cmd_counter(t_token *tokens)
+int	cmd_counter(t_token *tokens)
 {
 	int		count;
 	t_token	*current;
@@ -69,18 +70,20 @@ int cmd_counter(t_token *tokens)
 	return (count);
 }
 
-void rename_tokens(t_token *tokens)
+void	rename_tokens(t_token *tokens)
 {
 	t_token	*current;
 	int		cmd_count;
 
 	current = tokens;
 	cmd_count = cmd_counter(tokens);
-	printf("Number of cmds: %d\n", cmd_count);
 	path_tokens(tokens);
 	while (current && cmd_count-- > 0)
 	{
 		cmdarg_tokens(current);
-		current = current->next;
+		while (current && current->type != PIPE)
+			current = current->next;
+		if (current)
+			current = current->next;
 	}
 }

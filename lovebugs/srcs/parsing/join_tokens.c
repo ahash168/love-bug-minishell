@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   join_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:06:14 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/02 10:00:10 by ahashem          ###   ########.fr       */
+/*   Created: 2024/07/02 17:30:04 by ahashem           #+#    #+#             */
+/*   Updated: 2024/07/02 17:35:20 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	ft_env(t_env *my_env)
+void	join_tokens(t_token *tokens)
 {
-	t_env	*current;
-
-	current = my_env;
+	t_token	*current;
+	
+	current = tokens;
 	while (current)
 	{
-		printf("%s=%s\n", current->var, current->value);
+		if (current->type == DELIM)
+		{
+			if (current->next->type == SINGLE || current->next->type == DOUBLE)
+				ft_strjoin(current->str, current->next->str, 1);
+		}
 		current = current->next;
 	}
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:13:25 by bgordag           #+#    #+#             */
-/*   Updated: 2024/06/23 22:51:39 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/02 09:57:03 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # include <limits.h>
 # include <ctype.h>
 
-#ifndef MAX_PATH
-# define MAX_PATH 256
-#endif
+# ifndef MAX_PATH
+#  define MAX_PATH 256
+# endif
 
 // typedef struct s_env
 // {
@@ -38,7 +38,6 @@
 // 	char			*value;
 // 	struct s_env	*next;
 // }			t_env;
-
 
 int		ft_echo(char **input);
 int		ft_env(t_env *our_env);
