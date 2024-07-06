@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/02 17:37:13 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:18:38 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ t_token	*tokenizer(char *input)
 		last_token = current_token;
 		i += ft_strlen(current_token->str);
 	}
+	last_token->next = NULL;
 	return (tokens_list);
 }
 

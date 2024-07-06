@@ -6,11 +6,10 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:27:05 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/19 16:27:26 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:19:31 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 pipeline>          ::=     <simple_command>    '|' <pipeline>
                       |     <simple_command>    'ε'
 
@@ -46,4 +45,4 @@ and thennn only can we check the grammar being correct or not
 now in general this is a process that has to repeat itself over and over again as the user
 is allowed to input commands several times, so we can allocate get the data deal with it execute
 then free to allow the user to input again
-*/
+
