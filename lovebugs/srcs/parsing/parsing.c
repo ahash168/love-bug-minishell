@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/04 18:18:38 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/07 23:45:35 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,58 +130,37 @@ t_token	*tokenizer(char *input)
 	return (tokens_list);
 }
 
-void	quote_checker(char *input)
+int	parsing(char *input)
 {
-	int	i;
-	int	double_quote_open;
-	int	single_quote_open;
+	t_token	*tokens;
 
-	i = 0;
-	double_quote_open = 0;
-	single_quote_open = 0;
-	while (input[i])
-	{
-		if (input[i] == '\"' && !single_quote_open)
-			double_quote_open = !double_quote_open;
-		else if (input[i] == '\'' && !double_quote_open)
-			single_quote_open = !single_quote_open;
-		i++;
-	}
-	if (double_quote_open || single_quote_open)
-	{
-		fprintf(stderr, "Error: Unmatched quotes detected\n");
-		exit(1);
-	}
-}
+	tokens = NULL;
+	quote_checker(input);
+	tokens = tokenizer(input);
+	printf("\nfirst\n");
+	print_tokens(tokens);
 
-void	quote_remover(t_token *tokens)
-{
-	int		i;
-	int		j;
-	char	*new_str;
-	t_token	*current;
+	parse_tokens(tokens);
+	printf("\nsecond\n");
+	print_tokens(tokens);
 
-	current = tokens;
-	while (current)
-	{
-		if (current->type == SINGLE || current->type == DOUBLE)
-		{
-			new_str = ft_calloc(ft_strlen(current->str) - 2, sizeof(char));
-			i = 0;
-			j = 0;
-			while (current->str[i])
-			{
-				if ((current->str[i] != '\'' && current->type == SINGLE)
-					|| (current->str[i] != '\"' && current->type == DOUBLE))
-					new_str[j++] = current->str[i];
-				i++;
-			}
-			new_str[j] = '\0';
-			free(current->str);
-			current->str = new_str;
-		}
-		current = current->next;
-	}
+	join_tokens(tokens);
+	printf("\nthird\n");
+	print_tokens(tokens);
+
+	rename_tokens(tokens);
+	printf("\nfourth\n");
+	print_tokens(tokens);
+
+	expand_var(tokens);
+	printf("\nfifth\n");
+	print_tokens(tokens);
+	
+	quote_remover(tokens);
+	printf("\nsixth\n");
+	print_tokens(tokens);
+
+	return (0);
 }
 
 // int	parsing(char *input)
@@ -191,40 +170,18 @@ void	quote_remover(t_token *tokens)
 // 	tokens = NULL;
 // 	quote_checker(input);
 // 	tokens = tokenizer(input);
-// 	printf("\nfirst\n");
-// 	print_tokens(tokens);
+// 	// printf("\nfirst\n");
+// 	// print_tokens(tokens);
 // 	parse_tokens(tokens);
 // 	quote_remover(tokens);
-// 	printf("\nsecond\n");
-// 	print_tokens(tokens);
-// 	rename_tokens(tokens);
-// 	printf("\nthird\n");
-// 	print_tokens(tokens);
-// 	// join_tokens(tokens);
-// 	// printf("\nfourth\n");
+// 	// printf("\nsecond\n");
 // 	// print_tokens(tokens);
+// 	rename_tokens(tokens);
+// 	// printf("\nthird\n");
+// 	// print_tokens(tokens);
+// 	init_cmds(tokens);
 // 	return (0);
 // }
-
-int	parsing(char *input)
-{
-	t_token	*tokens;
-
-	tokens = NULL;
-	quote_checker(input);
-	tokens = tokenizer(input);
-	// printf("\nfirst\n");
-	// print_tokens(tokens);
-	parse_tokens(tokens);
-	quote_remover(tokens);
-	// printf("\nsecond\n");
-	// print_tokens(tokens);
-	rename_tokens(tokens);
-	// printf("\nthird\n");
-	// print_tokens(tokens);
-	init_cmds(tokens);
-	return (0);
-}
 
 // t_parsed_commands parse(char *line)
 // {

@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/02 17:30:59 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/07 17:13:54 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ int		parsing(char *input);
 void	parse_tokens(t_token *tokens);
 void	rename_tokens(t_token *tokens);
 void	join_tokens(t_token *tokens);
+void	expand_var(t_token *tokens);
+void	print_tokens(t_token *head);
+
+void	quote_checker(char *input);
+void	quote_remover(t_token *tokens);
 
 void	init_cmds(t_token *tokens);
 

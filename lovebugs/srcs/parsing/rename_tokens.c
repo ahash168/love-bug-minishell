@@ -54,6 +54,19 @@ void	path_tokens(t_token *tokens)
 	}
 }
 
+void	word_tokens(t_token *tokens)
+{
+	t_token	*current;
+
+	current = tokens;
+	while (current)
+	{
+		if (current->type == SINGLE || current->type == DOUBLE)
+			current->type = WORD;
+		current = current->next;
+	}
+}
+
 int	cmd_counter(t_token *tokens)
 {
 	int		count;
@@ -78,6 +91,8 @@ void	rename_tokens(t_token *tokens)
 	current = tokens;
 	cmd_count = cmd_counter(tokens);
 	path_tokens(tokens);
+	word_tokens(tokens);
+	print_tokens(tokens);
 	while (current && cmd_count-- > 0)
 	{
 		cmdarg_tokens(current);
