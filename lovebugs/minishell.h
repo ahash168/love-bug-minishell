@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/07 17:13:54 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:29:01 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	print_tokens(t_token *head);
 void	quote_checker(char *input);
 void	quote_remover(t_token *tokens);
 
-void	init_cmds(t_token *tokens);
+t_cmd	*init_cmds(t_token *tokens);
+void	print_cmds(t_cmd *head);
+void	init_redir(t_cmd *cmds, t_token *tokens);
 
 #endif

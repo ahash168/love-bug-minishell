@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/07 23:45:35 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/09 20:35:18 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,33 +133,43 @@ t_token	*tokenizer(char *input)
 int	parsing(char *input)
 {
 	t_token	*tokens;
+	t_cmd	*cmds;
 
 	tokens = NULL;
+	cmds = NULL;
 	quote_checker(input);
 	tokens = tokenizer(input);
-	printf("\nfirst\n");
-	print_tokens(tokens);
+	// printf("\nfirst\n");
+	// print_tokens(tokens);
 
 	parse_tokens(tokens);
-	printf("\nsecond\n");
-	print_tokens(tokens);
+	// printf("\nsecond\n");
+	// print_tokens(tokens);
 
 	join_tokens(tokens);
-	printf("\nthird\n");
-	print_tokens(tokens);
+	// printf("\nthird\n");
+	// print_tokens(tokens);
 
 	rename_tokens(tokens);
-	printf("\nfourth\n");
-	print_tokens(tokens);
+	// printf("\nfourth\n");
+	// print_tokens(tokens);
 
 	expand_var(tokens);
-	printf("\nfifth\n");
-	print_tokens(tokens);
+	// printf("\nfifth\n");
+	// print_tokens(tokens);
 	
 	quote_remover(tokens);
-	printf("\nsixth\n");
+	// printf("\nsixth\n");
 	print_tokens(tokens);
 
+	cmds = init_cmds(tokens);
+	printf("\nfirst\n");
+	print_cmds(cmds);
+	
+	init_redir(cmds, tokens);
+	printf("\nsecond\n");
+	print_cmds(cmds);
+	
 	return (0);
 }
 
