@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/09 15:10:09 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/11 17:29:21 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ LIBFT	=	libft/ft_isprint.c libft/ft_putchar_fd.c libft/ft_strjoin.c \
 			libft/ft_isdigit.c libft/ft_memset.c libft/ft_striteri.c \
 			libft/ft_strrchr.c libft/ft_realloc.c
 
+GNL		=	gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c
+
 BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
 
 SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
@@ -33,7 +35,7 @@ SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/init_cmds.c parsing/init_redir.c\
 			execution/execute_commands.c execution/execute.c
 
-SRC 	= 	$(LIBFT) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
+SRC 	= 	$(LIBFT) $(GNL) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
 
 OBJ		=	$(SRC:.c=.o)
 

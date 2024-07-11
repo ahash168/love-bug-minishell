@@ -92,7 +92,7 @@ void	rename_tokens(t_token *tokens)
 	cmd_count = cmd_counter(tokens);
 	path_tokens(tokens);
 	word_tokens(tokens);
-	print_tokens(tokens);
+	// print_tokens(tokens);
 	while (current && cmd_count-- > 0)
 	{
 		cmdarg_tokens(current);

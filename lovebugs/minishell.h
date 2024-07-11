@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/09 15:29:01 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/11 17:32:43 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./libft/libft.h"
 // # include "./builtins/builtins.h"
+# include "gnl/get_next_line_bonus.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
