@@ -27,7 +27,7 @@ void	handle_heredoc(t_cmd *cmd, char *delim)
 		if (!ft_strncmp(line, delim, ft_strlen(delim)))
 		{
 			free(line);
-			break ;	
+			break ;
 		}
 		write(tmp_fd, line, strlen(line));
         free(line);
@@ -48,10 +48,10 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 		token = token->next;
 	if (!ft_strncmp(str, ">>", 2))
 	{
+		if (cmd->out != 1 && cmd->out != -1)
+			close(cmd->out);
 		fd = open(token->next->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		printf("append %d\n", fd);
-		if (cmd->in != 1 && cmd->in != -1)
-			close(fd);
+		printf("app: %d, file: %s\n", fd, token->next->str);
 		cmd->out = fd;
 	}
 	else if (!ft_strncmp(str, "<<", 2))
@@ -61,18 +61,18 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 	}
 	else if (!ft_strncmp(str, "<", 1))
 	{
-		fd = open(token->next->str, O_RDONLY);
-		printf("in %d\n", fd);
 		if (cmd->in != 0 && cmd->in != -1)
-			close(fd);
+			close(cmd->in);
+		fd = open(token->next->str, O_RDONLY);
+		printf("in: %d, file: %s\n", fd, token->next->str);
 		cmd->in = fd;
 	}
 	else if (!ft_strncmp(str, ">", 1))
 	{
+		if (cmd->out != 1 && cmd->out != -1)
+			close(cmd->out);
 		fd = open(token->next->str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		printf("out %d\n", fd);
-		if (cmd->in != 1 && cmd->in != -1)
-			close(fd);
+		printf("out: %d, file: %s\n", fd, token->next->str);
 		cmd->out = fd;
 	}
 }
@@ -94,6 +94,15 @@ void	init_redir(t_cmd *cmds, t_token *tokens)
 		}
 		if (current_token && current_token->type == PIPE)
             current_token = current_token->next;
+		current_cmd = current_cmd->next;
+	}
+	current_cmd = cmds;
+	while (current_cmd)
+	{
+		if (current_cmd->in != 0)
+			close(current_cmd->in);
+		if (current_cmd->out != 1)
+			close(current_cmd->out);
 		current_cmd = current_cmd->next;
 	}
 }

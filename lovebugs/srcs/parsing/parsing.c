@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/09 20:35:18 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/12 22:36:56 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ t_token	*tokenizer(char *input)
 	return (tokens_list);
 }
 
-int	parsing(char *input)
+t_cmd	*parsing(char *input)
 {
 	t_token	*tokens;
 	t_cmd	*cmds;
@@ -170,7 +170,7 @@ int	parsing(char *input)
 	printf("\nsecond\n");
 	print_cmds(cmds);
 	
-	return (0);
+	return (cmds);
 }
 
 // int	parsing(char *input)

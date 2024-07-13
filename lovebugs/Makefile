@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/11 17:29:21 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/12 22:33:47 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
 SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
 			parsing/join_tokens.c parsing/expand_var.c parsing/handle_quotes.c \
-			parsing/init_cmds.c parsing/init_redir.c\
+			parsing/init_cmds.c parsing/init_redir.c parsing/init_env.c\
 			execution/execute_commands.c execution/execute.c
 
 SRC 	= 	$(LIBFT) $(GNL) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
