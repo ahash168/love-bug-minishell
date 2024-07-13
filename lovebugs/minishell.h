@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/12 22:53:58 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/13 22:45:17 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_cmd
 	char			**cmd;
 	int				in;
 	int				out;
+	int				count;
 	struct s_cmd	*next;
 }					t_cmd;
 
@@ -75,8 +76,8 @@ char	**freeer(char **arr);
 void	error_message(int n);
 void	errorer(void *ptr, int dimension, int n);
 
-int		is_builtin_input(char *input);
-int		exec_builtin(char **input, t_env *env);
+int		is_builtin(char *input);
+int		exec_builtin(char **cmd_arg, t_env *env);
 
 int		line_count(char *map_str);
 int		ft_strset(char strc, char *set);
@@ -100,13 +101,6 @@ t_cmd	*init_cmds(t_token *tokens);
 void	print_cmds(t_cmd *head);
 void	init_redir(t_cmd *cmds, t_token *tokens);
 
-# define ITALIC "\033[1;3m"
-# define GREEN	"\033[1;32m"
-# define RED	"\033[1;31m"
-# define YELLOW	"\033[1;33m"
-# define BLUE	"\033[38;5;75m"
-# define CYAN	"\033[1;96m"
-# define BOLD	"\033[1m"
-# define C_END	"\033[0m"
+void	exec_cmds(t_cmd *cmds, t_env *my_env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:15:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/09 15:14:21 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/13 17:42:34 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_cmd	*cmd_maker(t_token *tokens)
 		if (token && token->type == PIPE)
             token = token->next;
 	}
+	last_cmd->next = NULL;
 	return (cmds_list);
 }
 
@@ -104,12 +105,26 @@ void	std_inout(t_cmd *cmds)
 	}
 }
 
+int	cmd_count(t_cmd *cmds)
+{
+	int	i;
+
+	i = 0;
+	while (cmds)
+	{
+		i++;
+		cmds = cmds->next;
+	}
+	return (i);
+}
+
 t_cmd	*init_cmds(t_token *tokens)
 {
 	t_cmd	*cmds;
 	
 	cmds = NULL;
 	cmds = cmd_maker(tokens);
+	cmds->count = cmd_count(cmds);
 	std_inout(cmds);
 	return (cmds);
 	// print_cmds(cmds);

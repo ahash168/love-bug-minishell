@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/12 22:56:53 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/13 20:33:08 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	main(int ac, char **av, char **env)
 	t_env	*my_env;
 	t_cmd	*cmds;
 
-	(void) ac;
 	(void) av;
+	if (ac != 1 || !*env)
+		return (1);
 	my_env = NULL;
 	cmds = NULL;
 	init_env(env, &my_env);
@@ -32,10 +33,8 @@ int	main(int ac, char **av, char **env)
 		{
 			add_history(input);
 			cmds = parsing(input);
-			(void) cmds;
-			// parsed_commands = parser(input);
-			// execute_commands(parsed_commands, my_env);
-			// Parse and execute input
+			exec_cmds(cmds, my_env);
+			// printf("HI\n");
 		}
 		free(input);
 	}

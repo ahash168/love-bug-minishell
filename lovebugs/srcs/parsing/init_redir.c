@@ -97,12 +97,12 @@ void	init_redir(t_cmd *cmds, t_token *tokens)
 		current_cmd = current_cmd->next;
 	}
 	current_cmd = cmds;
-	while (current_cmd)
-	{
-		if (current_cmd->in != 0)
-			close(current_cmd->in);
-		if (current_cmd->out != 1)
-			close(current_cmd->out);
-		current_cmd = current_cmd->next;
-	}
+	// while (current_cmd)
+	// {
+	// 	if (current_cmd->in != 0)
+	// 		close(current_cmd->in);
+	// 	if (current_cmd->out != 1)
+	// 		close(current_cmd->out);
+	// 	current_cmd = current_cmd->next;
+	// }
 }

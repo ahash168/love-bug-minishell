@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:13:25 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/02 09:57:03 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/13 20:58:40 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
 // }			t_env;
 
 int		ft_echo(char **input);
-int		ft_env(t_env *our_env);
+int		ft_env(t_env *my_env);
 int		ft_pwd(void);
+int		ft_cd(char **input, t_env *my_env);
 
 #endif

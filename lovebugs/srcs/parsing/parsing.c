@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/12 22:36:56 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/13 21:40:00 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,15 +160,15 @@ t_cmd	*parsing(char *input)
 	
 	quote_remover(tokens);
 	// printf("\nsixth\n");
-	print_tokens(tokens);
+	// print_tokens(tokens);
 
 	cmds = init_cmds(tokens);
-	printf("\nfirst\n");
-	print_cmds(cmds);
+	// printf("\nfirst\n");
+	// print_cmds(cmds);
 	
 	init_redir(cmds, tokens);
-	printf("\nsecond\n");
-	print_cmds(cmds);
+	// printf("\nsecond\n");
+	// print_cmds(cmds);
 	
 	return (cmds);
 }

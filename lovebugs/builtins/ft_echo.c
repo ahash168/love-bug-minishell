@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:11 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/02 09:58:22 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/13 20:50:26 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	print_echo(char **input, int i, int check)
 {
 	while (input[i])
 	{
-		printf("%s", input[i]);
+		ft_putstr_fd(input[i], 1);
 		if (input[i + 1])
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 		i++;
 	}
 	if (check)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 }
 
 int	ft_echo(char **input)
@@ -47,6 +47,6 @@ int	ft_echo(char **input)
 			break ;
 	}
 	print_echo(input, i, check);
-	freeer(input);
+	// freeer(input);
 	return (0);
 }

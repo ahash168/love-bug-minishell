@@ -61,7 +61,8 @@ void	word_tokens(t_token *tokens)
 	current = tokens;
 	while (current)
 	{
-		if (current->type == SINGLE || current->type == DOUBLE)
+		if (current->type == SINGLE || current->type == DOUBLE \
+		|| current->type == VAR)
 			current->type = WORD;
 		current = current->next;
 	}
