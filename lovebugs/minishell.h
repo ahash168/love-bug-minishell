@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/14 15:57:17 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:04:43 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_cmd
 	int				in;
 	int				out;
 	int				count;
-	int				pids[2];
+	int				pid;
 	struct s_cmd	*next;
 }					t_cmd;
 

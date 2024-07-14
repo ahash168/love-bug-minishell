@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:05:53 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/14 15:56:04 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 22:15:53 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ int	exec_cmd(char **cmds, char **env)
 	if (pid == -1)
 		exit(1);
 	if (pid == 0)
-	{
 		execve(valid_cmds[0], valid_cmds, env);
-	}
 	return (pid);
 }
 
@@ -135,10 +133,29 @@ void	exec_single(t_cmd *cmd, t_env *my_env, char **env)
 		close(std_out);
 	}
 	else
-	{
-		cmd->pids[0] = exec_cmd(cmd->cmd, env);
-	}
+		cmd->pid = exec_cmd(cmd->cmd, env);
 }
+
+// void	exec_multiple(t_cmd *cmd, t_env *my_env, char **env)
+// {
+// 	int		std_in;
+// 	int		std_out;
+
+// 	std_in = dup(STDIN_FILENO);
+// 	std_out = dup(STDOUT_FILENO);
+	
+// 	if (is_builtin(cmd->cmd[0]) == 0)
+// 	{
+// 		set_redir(cmd);
+// 		exec_builtin(cmd->cmd, my_env);
+// 		dup2(std_in, STDIN_FILENO);
+// 		close(std_in);
+// 		dup2(std_out, STDOUT_FILENO);
+// 		close(std_out);
+// 	}
+// 	else
+// 		cmd->pid = exec_cmd(cmd->cmd, env);
+// }
 
 int	execution(t_cmd *cmds, t_env *my_env)
 {
@@ -150,10 +167,13 @@ int	execution(t_cmd *cmds, t_env *my_env)
 	if (cmds->count == 1)
 		exec_single(cmds, my_env, env);
 	// else
-	// 	exec_multiple(cmds, my_env);
+	// 	exec_multiple(cmds, my_env, env);
 	i = 0;
-	while (cmds->pids[i])
-		waitpid(cmds->pids[i++], &status, 0);
+	while (cmds)
+	{
+		waitpid(cmds->pid, &status, 0);
+		cmds = cmds->next;
+	}
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (1);

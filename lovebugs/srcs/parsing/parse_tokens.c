@@ -34,7 +34,6 @@ void	parse_tokens(t_token *tokens)
 				printf("error: wrong after space after pipe\n");
 				exit(1);
 			}
-			// printf("correct\n");
 		}
 		else if (current->type == REDIR)
 		{
@@ -51,7 +50,6 @@ void	parse_tokens(t_token *tokens)
 				printf("error: wrong after space after redirection\n");
 				exit(1);
 			}
-			// printf("correct\n");
 		}
 		current = current->next;
 	}

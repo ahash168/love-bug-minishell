@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:15:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/13 17:42:34 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 22:13:36 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_cmds(t_cmd *head)
 	int		i = 1;
 	int		x = 0;
 	t_cmd	*current = head;
-	
+
 	while (current != NULL)
 	{
 		printf("x: %d\n", x);		
@@ -45,7 +45,6 @@ int	fill_cmd(t_token *token, t_cmd *cmd)
 		if (current->type == CMD || current->type == ARG)
 			i++;
 		current = current->next;
-		
 	}
 	cmd->cmd = ft_calloc(i + 1, sizeof(char *));
 	current = token;
@@ -70,7 +69,7 @@ t_cmd	*cmd_maker(t_token *tokens)
 	t_cmd	*cmds_list;
 	t_cmd	*current_cmd;
 	t_cmd	*last_cmd;
-	
+
 	token = tokens;
 	cmds_list = NULL;
 	last_cmd = NULL;
@@ -86,7 +85,7 @@ t_cmd	*cmd_maker(t_token *tokens)
 		while (token && i-- > 0)
 			token = token->next;
 		if (token && token->type == PIPE)
-            token = token->next;
+			token = token->next;
 	}
 	last_cmd->next = NULL;
 	return (cmds_list);
@@ -121,7 +120,7 @@ int	cmd_count(t_cmd *cmds)
 t_cmd	*init_cmds(t_token *tokens)
 {
 	t_cmd	*cmds;
-	
+
 	cmds = NULL;
 	cmds = cmd_maker(tokens);
 	cmds->count = cmd_count(cmds);

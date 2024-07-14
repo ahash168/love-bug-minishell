@@ -30,7 +30,7 @@ void	handle_heredoc(t_cmd *cmd, char *delim)
 			break ;
 		}
 		write(tmp_fd, line, strlen(line));
-        free(line);
+		free(line);
 	}
 	close(tmp_fd);
 	tmp_fd = open("tmp_file.tmp", O_RDONLY);
@@ -97,6 +97,7 @@ void	init_redir(t_cmd *cmds, t_token *tokens)
 		current_cmd = current_cmd->next;
 	}
 	current_cmd = cmds;
+}
 	// while (current_cmd)
 	// {
 	// 	if (current_cmd->in != 0)
@@ -105,4 +106,4 @@ void	init_redir(t_cmd *cmds, t_token *tokens)
 	// 		close(current_cmd->out);
 	// 	current_cmd = current_cmd->next;
 	// }
-}
+// }

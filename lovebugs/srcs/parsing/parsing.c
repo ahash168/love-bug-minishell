@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/13 21:40:00 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 22:12:59 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,66 +139,55 @@ t_cmd	*parsing(char *input)
 	cmds = NULL;
 	quote_checker(input);
 	tokens = tokenizer(input);
-	// printf("\nfirst\n");
-	// print_tokens(tokens);
-
 	parse_tokens(tokens);
-	// printf("\nsecond\n");
-	// print_tokens(tokens);
-
 	join_tokens(tokens);
-	// printf("\nthird\n");
-	// print_tokens(tokens);
-
 	rename_tokens(tokens);
-	// printf("\nfourth\n");
-	// print_tokens(tokens);
-
 	expand_var(tokens);
-	// printf("\nfifth\n");
-	// print_tokens(tokens);
-	
 	quote_remover(tokens);
-	// printf("\nsixth\n");
-	// print_tokens(tokens);
-
 	cmds = init_cmds(tokens);
-	// printf("\nfirst\n");
-	// print_cmds(cmds);
-	
 	init_redir(cmds, tokens);
-	// printf("\nsecond\n");
-	// print_cmds(cmds);
-	
 	return (cmds);
 }
 
-// int	parsing(char *input)
+// t_cmd	*parsing(char *input)
 // {
 // 	t_token	*tokens;
+// 	t_cmd	*cmds;
 
 // 	tokens = NULL;
+// 	cmds = NULL;
 // 	quote_checker(input);
 // 	tokens = tokenizer(input);
 // 	// printf("\nfirst\n");
 // 	// print_tokens(tokens);
+
 // 	parse_tokens(tokens);
-// 	quote_remover(tokens);
 // 	// printf("\nsecond\n");
 // 	// print_tokens(tokens);
-// 	rename_tokens(tokens);
+
+// 	join_tokens(tokens);
 // 	// printf("\nthird\n");
 // 	// print_tokens(tokens);
-// 	init_cmds(tokens);
-// 	return (0);
-// }
 
-// t_parsed_commands parse(char *line)
-// {
-// 	t_parsed_commands parsed_commands;
+// 	rename_tokens(tokens);
+// 	// printf("\nfourth\n");
+// 	// print_tokens(tokens);
 
-// 	parsed_commands.commands = ft_calloc(1, sizeof(char **));
-// 	parsed_commands.commands[0] = ft_split(line, ' ');
-// 	parsed_commands.commands_length = 1;
-// 	return parsed_commands;
+// 	expand_var(tokens);
+// 	// printf("\nfifth\n");
+// 	// print_tokens(tokens);
+
+// 	quote_remover(tokens);
+// 	// printf("\nsixth\n");
+// 	// print_tokens(tokens);
+
+// 	cmds = init_cmds(tokens);
+// 	// printf("\nfirst\n");
+// 	// print_cmds(cmds);
+
+// 	init_redir(cmds, tokens);
+// 	// printf("\nsecond\n");
+// 	// print_cmds(cmds);
+
+// 	return (cmds);
 // }
