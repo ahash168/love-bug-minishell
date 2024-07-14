@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:13:25 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/13 20:58:40 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 13:06:57 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@
 # ifndef MAX_PATH
 #  define MAX_PATH 256
 # endif
-
-// typedef struct s_env
-// {
-// 	char			*var;
-// 	char			*value;
-// 	struct s_env	*next;
-// }			t_env;
 
 int		ft_echo(char **input);
 int		ft_env(t_env *my_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:20 by bgordag           #+#    #+#             */
-/*   Updated: 2024/06/23 23:04:30 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/14 13:07:44 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ int	ft_pwd(void)
 	char	cwd[MAX_PATH];
 
 	getcwd(cwd, sizeof(cwd));
-	printf("%s\n", cwd);
+	ft_putendl_fd(cwd, 1);
 	return (0);
 }

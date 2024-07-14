@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/13 22:45:17 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 15:57:17 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_cmd
 	int				in;
 	int				out;
 	int				count;
+	int				pids[2];
 	struct s_cmd	*next;
 }					t_cmd;
 
@@ -101,6 +102,6 @@ t_cmd	*init_cmds(t_token *tokens);
 void	print_cmds(t_cmd *head);
 void	init_redir(t_cmd *cmds, t_token *tokens);
 
-void	exec_cmds(t_cmd *cmds, t_env *my_env);
+int		execution(t_cmd *cmds, t_env *my_env);
 
 #endif

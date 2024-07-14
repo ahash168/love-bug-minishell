@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/13 18:21:46 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/14 15:45:38 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,13 @@ SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
 			parsing/join_tokens.c parsing/expand_var.c parsing/handle_quotes.c \
 			parsing/init_cmds.c parsing/init_redir.c parsing/init_env.c\
-			execution/exec_cmds.c
+			execution/execution.c
 
 SRC 	= 	$(LIBFT) $(GNL) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 
 LRLFLAG =	-lreadline
 

@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/13 20:33:08 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 14:18:50 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av, char **env)
 		{
 			add_history(input);
 			cmds = parsing(input);
-			exec_cmds(cmds, my_env);
+			execution(cmds, my_env);
 			// printf("HI\n");
 		}
 		free(input);

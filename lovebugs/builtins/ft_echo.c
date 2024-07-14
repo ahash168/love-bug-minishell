@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:11 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/13 20:50:26 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/14 13:07:11 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ int	ft_echo(char **input)
 			break ;
 	}
 	print_echo(input, i, check);
-	// freeer(input);
 	return (0);
 }

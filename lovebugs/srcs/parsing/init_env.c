@@ -36,4 +36,5 @@ void	init_env(char **env, t_env **my_env)
 		last_var = new_var;
 		i++;
 	}
+	last_var->next = NULL;
 }
