@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/14 15:45:38 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/16 18:44:35 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
 			parsing/join_tokens.c parsing/expand_var.c parsing/handle_quotes.c \
 			parsing/init_cmds.c parsing/init_redir.c parsing/init_env.c\
-			execution/execution.c
+			execution/execution.c execution/exec_single.c
 
 SRC 	= 	$(LIBFT) $(GNL) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
 

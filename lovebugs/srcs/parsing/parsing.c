@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/14 22:12:59 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:30:25 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,48 +105,40 @@ void	name_token(char *input, t_token *token)
 	token->str = ft_substr(input, 0, i);
 }
 
-t_token	*tokenizer(char *input)
+void	tokenizer(t_mini *shell)
 {
 	int		i;
-	t_token	*tokens_list;
 	t_token	*current_token;
 	t_token	*last_token;
 
 	i = 0;
-	tokens_list = NULL;
 	last_token = NULL;
-	while (input[i])
+	while (shell->input[i])
 	{
 		current_token = ft_calloc(1, sizeof(t_token));
-		name_token(&input[i], current_token);
-		if (!tokens_list)
-			tokens_list = current_token;
+		name_token(&(shell->input[i]), current_token);
+		if (!shell->tokens)
+			shell->tokens = current_token;
 		else
 			last_token->next = current_token;
 		last_token = current_token;
 		i += ft_strlen(current_token->str);
 	}
 	last_token->next = NULL;
-	return (tokens_list);
 }
 
-t_cmd	*parsing(char *input)
+int	parsing(t_mini *shell)
 {
-	t_token	*tokens;
-	t_cmd	*cmds;
-
-	tokens = NULL;
-	cmds = NULL;
-	quote_checker(input);
-	tokens = tokenizer(input);
-	parse_tokens(tokens);
-	join_tokens(tokens);
-	rename_tokens(tokens);
-	expand_var(tokens);
-	quote_remover(tokens);
-	cmds = init_cmds(tokens);
-	init_redir(cmds, tokens);
-	return (cmds);
+	quote_checker(shell);
+	tokenizer(shell);
+	parse_tokens(shell);
+	join_tokens(shell->tokens);
+	rename_tokens(shell->tokens);
+	expand_var(shell->tokens);
+	quote_remover(shell->tokens);
+	shell->cmds = init_cmds(shell->tokens);
+	init_redir(shell->cmds, shell->tokens);
+	return (0);
 }
 
 // t_cmd	*parsing(char *input)

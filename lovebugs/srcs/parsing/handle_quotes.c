@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	quote_checker(char *input)
+void	quote_checker(t_mini *shell)
 {
 	int	i;
 	int	double_quote_open;
@@ -21,11 +21,11 @@ void	quote_checker(char *input)
 	i = 0;
 	double_quote_open = 0;
 	single_quote_open = 0;
-	while (input[i])
+	while (shell->input[i])
 	{
-		if (input[i] == '\"' && !single_quote_open)
+		if (shell->input[i] == '\"' && !single_quote_open)
 			double_quote_open = !double_quote_open;
-		else if (input[i] == '\'' && !double_quote_open)
+		else if (shell->input[i] == '\'' && !double_quote_open)
 			single_quote_open = !single_quote_open;
 		i++;
 	}

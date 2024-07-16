@@ -12,11 +12,11 @@
 
 #include "../../minishell.h"
 
-void	parse_tokens(t_token *tokens)
+void	parse_tokens(t_mini *shell)
 {
 	t_token	*current;
 
-	current = tokens;
+	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == PIPE)
