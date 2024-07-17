@@ -131,12 +131,12 @@ char *expand_with_single_quotes(char *str)
 //     return expanded;
 // }
 
-void expand_var(t_token *tokens)
+void expand_var(t_mini *shell)
 {
 	t_token *current;
 	char *new_str;
 
-	current = tokens;
+	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == DOUBLE || current->type == VAR)
@@ -155,7 +155,7 @@ void expand_var(t_token *tokens)
 	}
 }
 
-// void	expand_var(t_token *tokens)
+// void	expand_var(t_token *shell->tokens)
 // {
 // 	t_token	*current;
 // 	char	*new_str;

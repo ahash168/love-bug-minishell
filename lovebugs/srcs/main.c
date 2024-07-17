@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/16 18:59:20 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 22:02:48 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,31 @@ void	free_s_env(t_env *env)
 void	reset_shell(t_mini *shell)
 {
 	if (shell->input)
+	{
 		free(shell->input);
+		shell->input = NULL;
+	}
 	if (shell->tokens)
+	{
 		free_s_token(shell->tokens);
-	// if (shell->cmds)
-	// 	free_s_cmd(shell->cmds);
-	// freeer(shell->env_arr);
+		shell->tokens = NULL;
+	}
+	if (shell->cmds)
+	{
+		free_s_cmd(shell->cmds);
+		shell->cmds = NULL;
+	}
+	freeer(shell->env_arr);
 	shell->cmd_count = 0;
 	shell->pipe_fd[0] = 0;
 	shell->pipe_fd[1] = 0;
 	shell->prev_pipe = 0;
+}
+
+void	free_shell(t_mini *shell)
+{
+	reset_shell(shell);
+	free_s_env(shell->env_list);
 }
 
 int	main(int ac, char **av, char **env)
@@ -113,12 +128,11 @@ int	main(int ac, char **av, char **env)
 			add_history(shell->input);
 			if (!parsing(shell))
 			{
-				execution(shell->cmds, shell->env_list);
+				execution(shell);
 			}
 			reset_shell(shell);
 		}
-		// free(shell->input);
 	}
-	free_s_env(shell->env_list);
+	free_shell(shell);
 	return (0);
 }

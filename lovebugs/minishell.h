@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/16 18:44:54 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 19:21:39 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_cmd
 	char			**cmd;
 	int				in;
 	int				out;
-	int				count;
+	// int				count;
 	int				pid;
 	struct s_cmd	*next;
 }					t_cmd;
@@ -89,33 +89,31 @@ char	**freeer(char **arr);
 void	error_message(int n);
 void	errorer(void *ptr, int dimension, int n);
 
-int		is_builtin(char *input);
-int		exec_builtin(char **cmd_arg, t_env *env);
-
 int		line_count(char *map_str);
 int		ft_strset(char strc, char *set);
 int		strchar_count(char *str, char c);
 
-// void	execute_commands(t_parsed_commands parsed_commands, t_env *my_env);
-// void	execute(char **command, int input_file, int output_file, t_env *my_env);
 void	init_env(char **env, t_env **my_env);
 
 int		parsing(t_mini *shell);
 void	parse_tokens(t_mini *shell);
-void	rename_tokens(t_token *tokens);
-void	join_tokens(t_token *tokens);
-void	expand_var(t_token *tokens);
+void	rename_tokens(t_mini *shell);
+void	join_tokens(t_mini *shell);
+void	expand_var(t_mini *shell);
 void	print_tokens(t_token *head);
 
 void	quote_checker(t_mini *shell);
-void	quote_remover(t_token *tokens);
+void	quote_remover(t_mini *shell);
 
-t_cmd	*init_cmds(t_token *tokens);
+void	init_cmds(t_mini *shell);
 void	print_cmds(t_cmd *head);
-void	init_redir(t_cmd *cmds, t_token *tokens);
+void	init_redir(t_mini *shell);
 
-int		execution(t_cmd *cmds, t_env *my_env);
+int		execution(t_mini *shell);
 void	exec_single(t_cmd *cmd, t_env *my_env, char **env);
 void	set_redir(t_cmd *cmd);
+
+int		is_builtin(char *input);
+int		exec_builtin(char **cmd_arg, t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:05:53 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/16 18:43:39 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 22:15:54 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,43 +56,19 @@ void	set_redir(t_cmd *cmd)
 	}
 }
 
-// void	exec_multiple(t_cmd *cmd, t_env *my_env, char **env)
-// {
-// 	int		std_in;
-// 	int		std_out;
-
-// 	std_in = dup(STDIN_FILENO);
-// 	std_out = dup(STDOUT_FILENO);
-	
-// 	if (is_builtin(cmd->cmd[0]) == 0)
-// 	{
-// 		set_redir(cmd);
-// 		exec_builtin(cmd->cmd, my_env);
-// 		dup2(std_in, STDIN_FILENO);
-// 		close(std_in);
-// 		dup2(std_out, STDOUT_FILENO);
-// 		close(std_out);
-// 	}
-// 	else
-// 		cmd->pid = exec_cmd(cmd->cmd, env);
-// }
-
-int	execution(t_cmd *cmds, t_env *my_env)
+int	execution(t_mini *shell)
 {
-	char	**env;
-	int		i;
 	int		status;
 
-	env = list_to_array(my_env);
-	if (cmds->count == 1)
-		exec_single(cmds, my_env, env);
+	shell->env_arr = list_to_array(shell->env_list);
+	if (shell->cmd_count == 1)
+		exec_single(shell->cmds, shell->env_list, shell->env_arr);
 	// else
-	// 	exec_multiple(cmds, my_env, env);
-	i = 0;
-	while (cmds)
+	// 	exec_multiple(shell->cmds, shell->env_list, env_arr);
+	while (shell->cmds)
 	{
-		waitpid(cmds->pid, &status, 0);
-		cmds = cmds->next;
+		waitpid(shell->cmds->pid, &status, 0);
+		shell->cmds = shell->cmds->next;
 	}
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

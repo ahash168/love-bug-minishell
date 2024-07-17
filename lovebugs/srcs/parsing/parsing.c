@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/16 17:30:25 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 19:14:37 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,12 @@ int	parsing(t_mini *shell)
 	quote_checker(shell);
 	tokenizer(shell);
 	parse_tokens(shell);
-	join_tokens(shell->tokens);
-	rename_tokens(shell->tokens);
-	expand_var(shell->tokens);
-	quote_remover(shell->tokens);
-	shell->cmds = init_cmds(shell->tokens);
-	init_redir(shell->cmds, shell->tokens);
+	join_tokens(shell);
+	rename_tokens(shell);
+	expand_var(shell);
+	quote_remover(shell);
+	init_cmds(shell);
+	init_redir(shell);
 	return (0);
 }
 

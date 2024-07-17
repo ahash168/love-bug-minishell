@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:09 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/13 22:36:09 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 14:28:29 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	go_to_home(t_env *my_env)
 
 void ft_cd(char **input, t_env *my_env)
 {
-    char cwd[2056];
-    char *old_pwd;
+    // char cwd[2056];
+    // char *old_pwd;
 
 	(void) my_env;
-	old_pwd = getcwd(cwd, sizeof(cwd));
+	// old_pwd = getcwd(cwd, sizeof(cwd));
     if (!input[1] || !ft_strncmp(input[1], "~", 2))
         go_to_home(my_env);
     else if (strcmp(input[1], "-") == 0)

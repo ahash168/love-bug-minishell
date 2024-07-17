@@ -36,7 +36,7 @@ void	quote_checker(t_mini *shell)
 	}
 }
 
-void	quote_remover(t_token *tokens)
+void	quote_remover(t_mini *shell)
 {
 	int		i;
 	int		j;
@@ -44,7 +44,7 @@ void	quote_remover(t_token *tokens)
 	char	quote;
 	t_token	*current;
 
-	current = tokens;
+	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == CMD || current->type == ARG

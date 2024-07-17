@@ -77,13 +77,13 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 	}
 }
 
-void	init_redir(t_cmd *cmds, t_token *tokens)
+void	init_redir(t_mini *shell)
 {
 	t_cmd	*current_cmd;
 	t_token	*current_token;
 
-	current_cmd = cmds;
-	current_token = tokens;
+	current_cmd = shell->cmds;
+	current_token = shell->tokens;
 	while (current_cmd)
 	{
 		while (current_token && current_token->type != PIPE)
@@ -96,8 +96,8 @@ void	init_redir(t_cmd *cmds, t_token *tokens)
             current_token = current_token->next;
 		current_cmd = current_cmd->next;
 	}
-	current_cmd = cmds;
 }
+	// current_cmd = cmds;
 	// while (current_cmd)
 	// {
 	// 	if (current_cmd->in != 0)

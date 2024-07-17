@@ -84,15 +84,15 @@ int	cmd_counter(t_token *tokens)
 	return (count);
 }
 
-void	rename_tokens(t_token *tokens)
+void	rename_tokens(t_mini *shell)
 {
 	t_token	*current;
 	int		cmd_count;
 
-	current = tokens;
-	cmd_count = cmd_counter(tokens);
-	path_tokens(tokens);
-	word_tokens(tokens);
+	current = shell->tokens;
+	cmd_count = cmd_counter(shell->tokens);
+	path_tokens(shell->tokens);
+	word_tokens(shell->tokens);
 	while (current && cmd_count-- > 0)
 	{
 		cmdarg_tokens(current);

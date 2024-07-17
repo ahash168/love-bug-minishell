@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:15:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/14 22:13:36 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 16:15:10 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	fill_cmd(t_token *token, t_cmd *cmd)
 	while (current && current->type != PIPE)
 	{
 		if (current->type == CMD)
-			cmd->cmd[0] = current->str;
+			cmd->cmd[0] = ft_strdup(current->str);
 		else if (current->type == ARG)
-			cmd->cmd[j++] = current->str;
+			cmd->cmd[j++] = ft_strdup(current->str);
 		current = current->next;
 		i++;
 	}
@@ -117,14 +117,10 @@ int	cmd_count(t_cmd *cmds)
 	return (i);
 }
 
-t_cmd	*init_cmds(t_token *tokens)
+void	init_cmds(t_mini *shell)
 {
-	t_cmd	*cmds;
-
-	cmds = NULL;
-	cmds = cmd_maker(tokens);
-	cmds->count = cmd_count(cmds);
-	std_inout(cmds);
-	return (cmds);
+	shell->cmds = cmd_maker(shell->tokens);
+	shell->cmd_count = cmd_count(shell->cmds);
+	std_inout(shell->cmds);
 	// print_cmds(cmds);
 }

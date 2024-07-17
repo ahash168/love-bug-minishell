@@ -6,18 +6,18 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:30:04 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/14 22:14:43 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 15:32:41 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	join_tokens(t_token *tokens)
+void	join_tokens(t_mini *shell)
 {
 	t_token	*current;
 	t_token	*next;
 
-	current = tokens;
+	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == SINGLE || current->type == DOUBLE
