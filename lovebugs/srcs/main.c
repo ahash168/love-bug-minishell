@@ -6,11 +6,13 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 11:02:54 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 16:29:45 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int		g_exit_code;
 
 void	init_shell(t_mini *shell)
 {

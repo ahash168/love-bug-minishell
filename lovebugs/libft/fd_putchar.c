@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   fd_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:06:20 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/19 15:18:06 by ahashem          ###   ########.fr       */
+/*   Created: 2023/11/03 11:14:30 by ahashem           #+#    #+#             */
+/*   Updated: 2024/07/18 17:05:35 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+int	fd_putchar(int fd, char c)
 {
-	char	cwd[MAX_PATH];
-
-	getcwd(cwd, sizeof(cwd));
-	ft_putendl_fd(cwd, 1);
-	return (0);
+	write (fd, &c, 1);
+	return (1);
 }

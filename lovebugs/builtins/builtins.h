@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:13:25 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/14 13:06:57 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 16:25:58 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@
 # include <limits.h>
 # include <ctype.h>
 
-# ifndef MAX_PATH
-#  define MAX_PATH 256
-# endif
+// # ifndef MAX_PATH
+// #  define MAX_PATH 256
+// # endif
 
-int		ft_echo(char **input);
-int		ft_env(t_env *my_env);
-int		ft_pwd(void);
-int		ft_cd(char **input, t_env *my_env);
+// int		g_exit_code;
+
+// int		ft_echo(char **input);
+// int		ft_env(t_env *my_env);
+// int		ft_pwd(void);
+// int		ft_cd(char **input, t_env *my_env);
 
 #endif

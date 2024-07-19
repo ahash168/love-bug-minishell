@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/17 19:14:37 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 18:37:00 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void	print_tokens(t_token *head)
 			type = ft_strdup("[VAR]     ");
 		if (current->type == DELIM)
 			type = ft_strdup("[DELIM]   ");
-		printf("Type: %s   String: %s\n", type, current->str);
+		printf("Type: %s   " BLUE "String: %s" RESET "\n", type, current->str);
 		current = current->next;
 	}
+	printf("\n");
 }
 
 enum e_type	find_token(char input_char)
@@ -127,59 +128,53 @@ void	tokenizer(t_mini *shell)
 	last_token->next = NULL;
 }
 
+// int	parsing(t_mini *shell)
+// {
+// 	quote_checker(shell);
+// 	tokenizer(shell);
+// 	parse_tokens(shell);
+// 	join_tokens(shell);
+// 	rename_tokens(shell);
+// 	expand_var(shell);
+// 	quote_remover(shell);
+// 	init_cmds(shell);
+// 	init_redir(shell);
+// 	return (0);
+// }
+
 int	parsing(t_mini *shell)
 {
 	quote_checker(shell);
 	tokenizer(shell);
+	// printf("\nfirst\n");
+	// print_tokens(shell->tokens);
+
 	parse_tokens(shell);
+	// printf("\nsecond\n");
+	// print_tokens(shell->tokens);
+
 	join_tokens(shell);
+	// printf("\nthird\n");
+	// print_tokens(shell->tokens);
+
 	rename_tokens(shell);
+	// printf("\nfourth\n");
+	// print_tokens(shell->tokens);
+
 	expand_var(shell);
+	// printf("\nfifth\n");
+	// print_tokens(shell->tokens);
+
 	quote_remover(shell);
+	// printf("\nsixth\n");
+	print_tokens(shell->tokens);
+
 	init_cmds(shell);
+	// printf("\nfirst\n");
+	// print_cmds(shell->cmds);
+
 	init_redir(shell);
+	// printf("\nsecond\n");
+	print_cmds(shell->cmds);
 	return (0);
 }
-
-// t_cmd	*parsing(char *input)
-// {
-// 	t_token	*tokens;
-// 	t_cmd	*cmds;
-
-// 	tokens = NULL;
-// 	cmds = NULL;
-// 	quote_checker(input);
-// 	tokens = tokenizer(input);
-// 	// printf("\nfirst\n");
-// 	// print_tokens(tokens);
-
-// 	parse_tokens(tokens);
-// 	// printf("\nsecond\n");
-// 	// print_tokens(tokens);
-
-// 	join_tokens(tokens);
-// 	// printf("\nthird\n");
-// 	// print_tokens(tokens);
-
-// 	rename_tokens(tokens);
-// 	// printf("\nfourth\n");
-// 	// print_tokens(tokens);
-
-// 	expand_var(tokens);
-// 	// printf("\nfifth\n");
-// 	// print_tokens(tokens);
-
-// 	quote_remover(tokens);
-// 	// printf("\nsixth\n");
-// 	// print_tokens(tokens);
-
-// 	cmds = init_cmds(tokens);
-// 	// printf("\nfirst\n");
-// 	// print_cmds(cmds);
-
-// 	init_redir(cmds, tokens);
-// 	// printf("\nsecond\n");
-// 	// print_cmds(cmds);
-
-// 	return (cmds);
-// }

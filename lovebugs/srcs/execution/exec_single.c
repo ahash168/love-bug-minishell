@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:24:33 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 10:30:38 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 14:34:33 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	exec_single(t_mini *shell)
 
 	std_in = dup(0);
 	std_out = dup(1);
-	printf("%p %p\n", shell->cmds, shell->cmds->cmd);
+	// printf("%p %p\n", shell->cmds, shell->cmds->cmd);
 	if (shell->cmds == NULL || shell->cmds->cmd == NULL || shell->cmds->cmd[0] == NULL)
 		return ;
 	if (is_builtin(shell->cmds->cmd[0]) == 0)

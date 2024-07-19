@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:02:43 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/13 22:42:56 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 18:34:23 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	is_builtin(char *cmd)
 	int	builtin;
 
 	builtin = 1;
-	if (ft_strncmp(cmd, "echo", 4) == 0 || ft_strncmp(cmd, "cd", 2) == 0 \
-	|| ft_strncmp(cmd, "pwd", 3) == 0 || ft_strncmp(cmd, "export", 6) == 0 \
-	|| ft_strncmp(cmd, "unset", 5) == 0 || ft_strncmp(cmd, "env", 3) == 0 \
-	|| ft_strncmp(cmd, "exit", 4) == 0 || ft_strncmp(cmd, "ECHO", 4) == 0\
-	|| ft_strncmp(cmd, "PWD", 3) == 0 || ft_strncmp(cmd, "ENV", 3) == 0)
+	if (ft_strncmp(cmd, "echo", 5) == 0 || ft_strncmp(cmd, "cd", 3) == 0 \
+	|| ft_strncmp(cmd, "pwd", 4) == 0 || ft_strncmp(cmd, "export", 7) == 0 \
+	|| ft_strncmp(cmd, "unset", 6) == 0 || ft_strncmp(cmd, "env", 4) == 0 \
+	|| ft_strncmp(cmd, "exit", 5) == 0 || ft_strncmp(cmd, "ECHO", 5) == 0\
+	|| ft_strncmp(cmd, "PWD", 4) == 0 || ft_strncmp(cmd, "ENV", 4) == 0)
 		builtin = 0;
 	return (builtin);
 }

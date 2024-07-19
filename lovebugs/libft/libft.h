@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:49:37 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/22 13:44:12 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 15:06:14 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdarg.h>
 
 # include <ctype.h>
 # include <stdio.h>
@@ -70,5 +71,14 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	*ft_realloc(void *ptr, size_t new_size, size_t old_size);
+
+int		fd_printf(int fd, const char *str, ...);
+int		fd_parse(int fd, va_list ptr, char c);
+int		fd_putchar(int fd, char c);
+int		fd_putstr(int fd, char *str);
+int		fd_put_hex(int fd, unsigned int nb, char c);
+int		fd_putnbr(int fd, int nb);
+int		fd_putnbr_u(int fd, unsigned int nb);
+int		fd_put_address(int fd, unsigned long long nb);
 
 #endif

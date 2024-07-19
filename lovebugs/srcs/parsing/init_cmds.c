@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:15:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/18 18:37:20 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 18:35:37 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,18 @@
 void	print_cmds(t_cmd *head)
 {
 	int		i = 1;
-	int		x = 0;
 	t_cmd	*current = head;
 
 	while (current != NULL)
 	{
-		printf("x: %d\n", x);		
 		i = 1;
-		printf("CMD: %s$\n", current->cmd[0]);
+		printf("\nCMD: %s$\n", current->cmd[0]);
 		while (current->cmd[i] != NULL)
 			printf("ARG: %s$\n", current->cmd[i++]);
 		printf("IN: %d\tOUT: %d\n", current->in, current->out);
 		current = current->next;
-		x++;
 	}
+	printf("\n");
 }
 
 int	fill_cmd(t_token *token, t_cmd *cmd)

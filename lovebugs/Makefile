@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/17 23:49:50 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/19 15:10:53 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ LIBFT	=	libft/ft_isprint.c libft/ft_putchar_fd.c libft/ft_strjoin.c \
 			libft/ft_strchr.c libft/ft_strncmp.c libft/ft_isascii.c \
 			libft/ft_memmove.c libft/ft_strdup.c libft/ft_strnstr.c \
 			libft/ft_isdigit.c libft/ft_memset.c libft/ft_striteri.c \
-			libft/ft_strrchr.c libft/ft_realloc.c
+			libft/ft_strrchr.c libft/ft_realloc.c \
+			libft/fd_printf.c libft/fd_parse.c libft/fd_putchar.c \
+			libft/fd_putstr.c libft/fd_put_hex.c libft/fd_putnbr.c \
+			libft/fd_putnbr_u.c libft/fd_put_address.c
 
 GNL		=	gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c
 
@@ -33,7 +36,9 @@ SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
 			parsing/join_tokens.c parsing/expand_var.c parsing/handle_quotes.c \
 			parsing/init_cmds.c parsing/init_redir.c parsing/init_env.c\
-			execution/execution.c execution/exec_single.c execution/exec_multiple.c
+			execution/execution.c execution/exec_single.c execution/exec_multiple.c \
+			fd_close.c
+			
 
 SRC 	= 	$(LIBFT) $(GNL) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
 
