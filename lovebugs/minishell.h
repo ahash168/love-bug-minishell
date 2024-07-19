@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/17 19:21:39 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 11:06:52 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@
 # include <string.h>
 # include <limits.h>
 # include <ctype.h>
+
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define BOLD "\033[1m"
+#define UNDERLINE "\033[4m"
 
 enum e_type
 {
@@ -79,7 +89,6 @@ typedef struct s_mini
 	char			**env_arr;
 	struct s_env	*env_list;
 	int				pipe_fd[2];
-	int				prev_pipe;
 }					t_mini;
 
 char	**arrcopy(char **arr);
@@ -90,7 +99,8 @@ void	error_message(int n);
 void	errorer(void *ptr, int dimension, int n);
 
 int		line_count(char *map_str);
-int		ft_strset(char strc, char *set);
+int		ft_strset(char *str, char *set);
+int		ft_charset(char strc, char *set);
 int		strchar_count(char *str, char c);
 
 void	init_env(char **env, t_env **my_env);
@@ -110,8 +120,10 @@ void	print_cmds(t_cmd *head);
 void	init_redir(t_mini *shell);
 
 int		execution(t_mini *shell);
-void	exec_single(t_cmd *cmd, t_env *my_env, char **env);
+void	exec_single(t_mini *shell);
+void	exec_multiple(t_cmd *cmd, t_env *my_env, char **env);
 void	set_redir(t_cmd *cmd);
+char	**cmd_validator(char **cmd, char **env);
 
 int		is_builtin(char *input);
 int		exec_builtin(char **cmd_arg, t_env *env);

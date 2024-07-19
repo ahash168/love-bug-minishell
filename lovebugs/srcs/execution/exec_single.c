@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:24:33 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/16 18:42:11 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 10:30:38 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,71 @@ int	exec_cmd(char **cmds, char **env)
 		exit(1);
 	if (pid == 0)
 		execve(valid_cmds[0], valid_cmds, env);
+	freeer(valid_cmds);
 	return (pid);
 }
 
-void	exec_single(t_cmd *cmd, t_env *my_env, char **env)
+void	exec_single(t_mini *shell)
 {
 	int		std_in;
 	int		std_out;
 
-	std_in = dup(STDIN_FILENO);
-	std_out = dup(STDOUT_FILENO);
-	if (is_builtin(cmd->cmd[0]) == 0)
+	std_in = dup(0);
+	std_out = dup(1);
+	printf("%p %p\n", shell->cmds, shell->cmds->cmd);
+	if (shell->cmds == NULL || shell->cmds->cmd == NULL || shell->cmds->cmd[0] == NULL)
+		return ;
+	if (is_builtin(shell->cmds->cmd[0]) == 0)
 	{
-		set_redir(cmd);
-		exec_builtin(cmd->cmd, my_env);
-		dup2(std_in, STDIN_FILENO);
+		set_redir(shell->cmds);
+		exec_builtin(shell->cmds->cmd, shell->env_list);
+		dup2(std_in, 0);
 		close(std_in);
-		dup2(std_out, STDOUT_FILENO);
+		dup2(std_out, 1);
 		close(std_out);
 	}
 	else
-		cmd->pid = exec_cmd(cmd->cmd, env);
+		shell->cmds->pid = exec_cmd(shell->cmds->cmd, shell->env_arr);
 }
+
+
+
+// void handle_redirections_only(t_cmd *cmd)
+// {
+//     if (cmd->in != 0) 
+// 	{
+//         dup2(cmd->in, 0);
+//         close(cmd->in);
+//     }
+//     if (cmd->out != 1) 
+// 	{
+//         dup2(cmd->out, 1);
+//         close(cmd->out);
+//     }
+// }
+
+// void execute_cmd(t_cmd *cmd)
+// {
+//     if (cmd->cmd == NULL || cmd->cmd[0] == NULL) {
+//         // Only redirections, no command
+//         handle_redirections_only(cmd);
+//         return;
+//     }
+//     // If there is a command, execute it
+//     if (fork() == 0) {
+//         if (cmd->in != 0) {
+//             dup2(cmd->in, 0);
+//             close(cmd->in);
+//         }
+//         if (cmd->out != 1) {
+//             dup2(cmd->out, 1);
+//             close(cmd->out);
+//         }
+//         execvp(cmd->cmd[0], cmd->cmd);
+//         perror("execvp failed");
+//         exit(1);
+//     } else {
+//         wait(NULL);
+//     }
+// }
+

@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 15:11:57 by ahashem           #+#    #+#             */
-/*   Updated: 2024/06/21 15:12:32 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 10:52:57 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,32 @@ int	line_count(char *map_str)
 	return (j + 1);
 }
 
-int	ft_strset(char strc, char *set)
+int	ft_strset(char *str, char *set)
 {
 	int	i;
-	int	x;
 
 	i = 0;
-	x = 1;
+	while (str[i])
+	{
+		if (!ft_charset(str[i], set))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_charset(char strc, char *set)
+{
+	int	i;
+
+	i = 0;
 	while (set[i])
 	{
 		if (strc == set[i])
-			x = 0;
+			return (1);
 		i++;
 	}
-	if (x == 0)
-		return (0);
-	else
-		return (1);
+	return (0);
 }
 
 int	strchar_count(char *str, char c)

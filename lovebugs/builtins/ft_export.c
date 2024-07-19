@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:18 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/13 22:45:42 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 10:38:04 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // 	return (0);
 // }
 
-// int	ft_strset(char *set, char strc)
+// int	ft_charset(char *set, char strc)
 // {
 // 	int	i;
 // 	int	x;
@@ -47,7 +47,7 @@
 
 // int ft_export(char **input, char **env)
 // {
-// 	if (ft_strset(input[1], '='))
+// 	if (ft_charset(input[1], '='))
 // 		return (0);
 // 	if (get_var(env, input[1]))
 // 	{

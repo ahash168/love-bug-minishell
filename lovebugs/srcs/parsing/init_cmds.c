@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:15:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/17 16:15:10 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/18 18:37:20 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	fill_cmd(t_token *token, t_cmd *cmd)
 		current = current->next;
 		i++;
 	}
-	cmd->cmd[j] = NULL;
+	if (cmd->cmd && cmd->cmd[0])
+		cmd->cmd[j] = NULL;
 	return (i);
 }
 

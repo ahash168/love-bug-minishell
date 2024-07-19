@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 16:32:30 by ahashem           #+#    #+#             */
-/*   Updated: 2024/05/22 15:44:08 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/17 23:19:14 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_strtrim(char const *s1, char const *set, int f)
 	i = 0;
 	j = 0;
 	x = x_value(s1, set);
-	str = malloc(sizeof(char) * x + 1);
+	str = malloc(sizeof(char) * (x + 1));
 	if (!str)
 		return (NULL);
 	i = 0;

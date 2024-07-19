@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/17 22:02:48 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 11:02:54 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_shell(t_mini *shell)
 	shell->cmd_count = 0;
 	shell->pipe_fd[0] = 0;
 	shell->pipe_fd[1] = 0;
-	shell->prev_pipe = 0;
 }
 
 void	free_s_cmd(t_cmd *cmds)
@@ -95,17 +94,21 @@ void	reset_shell(t_mini *shell)
 		free_s_cmd(shell->cmds);
 		shell->cmds = NULL;
 	}
-	freeer(shell->env_arr);
+	if (shell->env_arr)
+	{
+		freeer(shell->env_arr);
+		shell->env_arr = NULL;		
+	}
 	shell->cmd_count = 0;
 	shell->pipe_fd[0] = 0;
 	shell->pipe_fd[1] = 0;
-	shell->prev_pipe = 0;
 }
 
 void	free_shell(t_mini *shell)
 {
 	reset_shell(shell);
 	free_s_env(shell->env_list);
+	free(shell);
 }
 
 int	main(int ac, char **av, char **env)
@@ -123,7 +126,7 @@ int	main(int ac, char **av, char **env)
 		shell->input = readline("minishell> ");
 		if (!shell->input)
 			break ;
-		if (*shell->input)
+		if (*shell->input && !ft_strset(shell->input, " \t"))
 		{
 			add_history(shell->input);
 			if (!parsing(shell))

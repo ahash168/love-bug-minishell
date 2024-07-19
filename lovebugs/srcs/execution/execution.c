@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:05:53 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/17 22:15:54 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/18 17:34:42 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	set_redir(t_cmd *cmd)
 {
 	if (cmd->in != 0 && cmd->in != -1)
 	{
-		dup2(cmd->in, STDIN_FILENO);
+		dup2(cmd->in, 0);
 		close(cmd->in);
 	}
 	if (cmd->out != 1 && cmd->out != -1)
 	{
-		dup2(cmd->out, STDOUT_FILENO);
+		dup2(cmd->out, 1);
 		close(cmd->out);
 	}
 }
@@ -62,12 +62,13 @@ int	execution(t_mini *shell)
 
 	shell->env_arr = list_to_array(shell->env_list);
 	if (shell->cmd_count == 1)
-		exec_single(shell->cmds, shell->env_list, shell->env_arr);
-	// else
-	// 	exec_multiple(shell->cmds, shell->env_list, env_arr);
+		exec_single(shell);
+	else
+		exec_multiple(shell->cmds, shell->env_list, shell->env_arr);
 	while (shell->cmds)
 	{
-		waitpid(shell->cmds->pid, &status, 0);
+		if (shell->cmds->pid)
+			waitpid(shell->cmds->pid, &status, 0);
 		shell->cmds = shell->cmds->next;
 	}
 	if (WIFEXITED(status))
