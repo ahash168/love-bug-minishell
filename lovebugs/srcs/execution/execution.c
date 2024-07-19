@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:05:53 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/18 17:34:42 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 21:32:47 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	execution(t_mini *shell)
 	if (shell->cmd_count == 1)
 		exec_single(shell);
 	else
-		exec_multiple(shell->cmds, shell->env_list, shell->env_arr);
+		exec_multiple(shell->cmds, shell->env_list, shell->env_arr, shell);
 	while (shell->cmds)
 	{
 		if (shell->cmds->pid)

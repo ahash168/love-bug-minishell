@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:24:33 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 14:34:33 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/19 21:14:11 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	exec_single(t_mini *shell)
 	if (is_builtin(shell->cmds->cmd[0]) == 0)
 	{
 		set_redir(shell->cmds);
-		exec_builtin(shell->cmds->cmd, shell->env_list);
+		exec_builtin(shell);
 		dup2(std_in, 0);
 		close(std_in);
 		dup2(std_out, 1);
