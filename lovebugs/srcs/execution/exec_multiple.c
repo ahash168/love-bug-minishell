@@ -26,11 +26,12 @@ void	handle_pipes(t_cmd *cmds)
 	}
 }
 
-void	exec_cmds(t_cmd *cmd, t_env *my_env, char **env)
+void	exec_cmds(t_cmd *cmd, t_env *my_env, char **env, t_mini *shell)
 {
+	(void) my_env;
 	if (is_builtin(cmd->cmd[0]) == 0)
 	{
-		exec_builtin(cmd->cmd, my_env);
+		exec_builtin(shell);
 		exit(0); // Ensure the child process exits after executing a builtin
 	}
 	else
@@ -42,7 +43,7 @@ void	exec_cmds(t_cmd *cmd, t_env *my_env, char **env)
 	}
 }
 
-void	exec_multiple(t_cmd *cmds, t_env *my_env, char **env)
+void	exec_multiple(t_cmd *cmds, t_env *my_env, char **env, t_mini *shell)
 {
 	int		status;
 	t_cmd	*current_cmd = cmds;
@@ -71,7 +72,7 @@ void	exec_multiple(t_cmd *cmds, t_env *my_env, char **env)
 				dup2(current_cmd->out, 1);
 				close(current_cmd->out);
 			}
-			exec_cmds(current_cmd, my_env, env);
+			exec_cmds(current_cmd, my_env, env, shell);
 		}
 		else
 		{

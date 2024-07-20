@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:02:43 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/19 18:34:23 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/21 02:42:02 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,26 @@ int	is_builtin(char *cmd)
 	return (builtin);
 }
 
-int	exec_builtin(char **cmd_arg, t_env *env)
+int	exec_builtin(t_mini *shell)
 {
 	// (void) env;
-	if (ft_strncmp(cmd_arg[0], "echo", 4) == 0 \
-	|| ft_strncmp(cmd_arg[0], "ECHO", 4) == 0)
-		ft_echo(cmd_arg);
-	else if (ft_strncmp(cmd_arg[0], "cd", 2) == 0)
-		ft_cd(cmd_arg, env);
-	else if (ft_strncmp(cmd_arg[0], "pwd", 3) == 0 \
-	|| ft_strncmp(cmd_arg[0], "PWD", 3) == 0)
+	if (ft_strncmp(shell->cmds->cmd[0], "echo", 5) == 0 \
+	|| ft_strncmp(shell->cmds->cmd[0], "ECHO", 5) == 0)
+		ft_echo(shell->cmds->cmd);
+	else if (ft_strncmp(shell->cmds->cmd[0], "cd", 3) == 0)
+		ft_cd(shell->cmds->cmd, shell->env_list);
+	else if (ft_strncmp(shell->cmds->cmd[0], "pwd", 4) == 0 \
+	|| ft_strncmp(shell->cmds->cmd[0], "PWD", 4) == 0)
 		ft_pwd();
-	// else if (ft_strncmp(cmd_arg[0], "export", 6) == 0)
+	// else if (ft_strncmp(shell->cmds->cmd[0], "export", 7) == 0)
 	// 	ft_export();
-	// else if (ft_strncmp(cmd_arg[0], "unset", 5) == 0)
-	// 	ft_unset();
-	else if (ft_strncmp(cmd_arg[0], "env", 3) == 0 \
-	|| ft_strncmp(cmd_arg[0], "ENV", 3) == 0)
-		ft_env(env);
-	// else if (ft_strncmp(cmd_arg[0], "exit", 4) == 0)
-	// 	ft_exit();
+	else if (ft_strncmp(shell->cmds->cmd[0], "unset", 6) == 0)
+		ft_unset(shell->cmds->cmd, shell);
+	else if (ft_strncmp(shell->cmds->cmd[0], "env", 4) == 0 \
+	|| ft_strncmp(shell->cmds->cmd[0], "ENV", 4) == 0)
+		ft_env(shell->env_list);
+	else if (ft_strncmp(shell->cmds->cmd[0], "exit", 5) == 0)
+		ft_exit(shell->cmds->cmd, shell);
 	else
 		return (1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:49:37 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 15:06:14 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/20 15:13:17 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdarg.h>
-
+# include <limits.h>
 # include <ctype.h>
 # include <stdio.h>
 

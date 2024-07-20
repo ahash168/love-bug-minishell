@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 16:30:22 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/21 03:04:12 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stddef.h>
-
-// # include <unistd.h>
-// # include <stdlib.h>
-// # include <stdio.h>
-// # include <fcntl.h>
-// # include <errno.h>
-// # include <sys/wait.h>
-// # include <errno.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
-
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <string.h>
 # include <limits.h>
 # include <ctype.h>
@@ -138,12 +130,12 @@ void	init_redir(t_mini *shell);
 
 int		execution(t_mini *shell);
 void	exec_single(t_mini *shell);
-void	exec_multiple(t_cmd *cmd, t_env *my_env, char **env);
+void	exec_multiple(t_cmd *cmds, t_env *my_env, char **env, t_mini *shell);
 void	set_redir(t_cmd *cmd);
 char	**cmd_validator(char **cmd, char **env);
 
 int		is_builtin(char *input);
-int		exec_builtin(char **cmd_arg, t_env *env);
+int		exec_builtin(t_mini *shell);
 
 void	ft_exit_shell(t_mini *shell, int error, char *p_err, int fd);
 void	free_shell(t_mini *shell);
@@ -156,19 +148,21 @@ void	free_shell(t_mini *shell);
 # define ENV_FAIL_CODE 1
 # define EXPORT_FAIL_CODE 1
 # define EXPORT_FLAG 654
-# define UNSET_FLAG 456
-# define UNSET_FAIL_CODE 1
+# define UNSET_FLAG 1
+# define UNSET_FAIL_CODE 2
 # define COMMAND_FAIL 127
 # define EXIT_FAIL 1
 # define EXIT_ALPHA_CODE 255
 # define CD_FAIL 1
 # define EXIST 0
 
-extern int		g_exit_code;
+int		g_exit_code;
 
 int		ft_echo(char **input);
 int		ft_env(t_env *my_env);
 int		ft_pwd(void);
 void	ft_cd(char **input, t_env *my_env);
+void 	ft_exit(char **args, t_mini *mini);
+void	ft_unset(char **args, t_mini *mini);
 
 #endif
