@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:24:33 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 21:14:11 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/21 04:16:31 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,16 @@ int	exec_cmd(char **cmds, char **env)
 		exit(1);
 	if (pid == 0)
 		execve(valid_cmds[0], valid_cmds, env);
-	freeer(valid_cmds);
+	// freeer(valid_cmds);
 	return (pid);
 }
 
 void	exec_single(t_mini *shell)
 {
-	int		std_in;
-	int		std_out;
-
-	std_in = dup(0);
-	std_out = dup(1);
-	// printf("%p %p\n", shell->cmds, shell->cmds->cmd);
 	if (shell->cmds == NULL || shell->cmds->cmd == NULL || shell->cmds->cmd[0] == NULL)
 		return ;
 	if (is_builtin(shell->cmds->cmd[0]) == 0)
-	{
-		set_redir(shell->cmds);
 		exec_builtin(shell);
-		dup2(std_in, 0);
-		close(std_in);
-		dup2(std_out, 1);
-		close(std_out);
-	}
 	else
 		shell->cmds->pid = exec_cmd(shell->cmds->cmd, shell->env_arr);
 }
