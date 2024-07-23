@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/21 04:18:45 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 00:13:55 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void	reset_shell(t_mini *shell)
 		free_s_cmd(shell->cmds);
 		shell->cmds = NULL;
 	}
-	// if (shell->env_arr)
-	// {
-	// 	freeer(shell->env_arr);
-	// 	shell->env_arr = NULL;
-	// }
+	if (shell->env_arr)
+	{
+		freeer(shell->env_arr);
+		shell->env_arr = NULL;
+	}
 	shell->cmd_count = 0;
 	shell->pipe_fd[0] = 0;
 	shell->pipe_fd[1] = 0;
