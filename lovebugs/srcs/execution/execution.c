@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:05:53 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 19:54:22 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 22:58:33 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ char	**fill_arr(t_env *my_env, int count)
 
 char	**list_to_array(t_env *my_env)
 {
-	int		i;
 	int		count;
 	char	**arr;
 	t_env	*current;
 
-	i = 0;
 	count = 0;
 	current = my_env;
 	while (current)

@@ -104,7 +104,7 @@ void	expand_var(t_mini *shell)
 			current->str = new_str;
 		}
 		else if (current->type == PATH || current->type == ARG
-				|| current->type == CMD)
+			|| current->type == CMD)
 		{
 			new_str = expand_with_single_quotes(current->str, shell);
 			free(current->str);

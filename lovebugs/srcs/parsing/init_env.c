@@ -12,6 +12,29 @@
 
 #include "../../minishell.h"
 
+char	**add_basic_env(t_mini *shell)
+{
+	char	**envp;
+	char	cwd[2056];
+	char	*pwd;
+	char	*full_env;
+
+	ft_bzero(cwd, sizeof(cwd));
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		pwd = ft_strjoin1("PWD=", cwd);
+	else
+		return (NULL);
+	full_env = ft_strjoin1(pwd, " SHLVL=0 _=/usr/bin/env");
+	if (!full_env)
+		return (NULL);
+	free(pwd);
+	envp = ft_split(full_env, ' ');
+	if (!envp)
+		ft_exit_shell(shell, 1, "add_basic_env", 2);
+	free(full_env);
+	return (envp);
+}
+
 void	increase_shlvl(t_env *my_env, t_mini *shell)
 {
 	char	*args_str;
@@ -40,7 +63,7 @@ void	init_env(char **env, t_env **my_env, t_mini *shell)
 	t_env	*last_var;
 
 	if (!env || !env[0])
-		return ;
+		env = add_basic_env(shell);
 	i = 0;
 	last_var = NULL;
 	while (env[i])

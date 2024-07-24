@@ -36,41 +36,46 @@ void	quote_checker(t_mini *shell)
 	}
 }
 
-void	quote_remover(t_mini *shell)
+void	newstr_maker(t_token *current, char *new_str)
 {
 	int		i;
 	int		j;
-	char	*new_str;
 	char	quote;
+
+	i = 0;
+	j = 0;
+	quote = 0;
+	new_str = ft_calloc(ft_strlen(current->str) + 1, sizeof(char));
+	while (current->str[i])
+	{
+		if (current->str[i] == '\'' || current->str[i] == '\"')
+		{
+			if (quote == 0)
+				quote = current->str[i];
+			else if (quote == current->str[i])
+				quote = 0;
+		}
+		else
+			new_str[j++] = current->str[i];
+		i++;
+	}
+	new_str[j] = '\0';
+	free(current->str);
+	current->str = new_str;
+}
+
+void	quote_remover(t_mini *shell)
+{
+	char	*new_str;
 	t_token	*current;
 
+	new_str = NULL;
 	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == CMD || current->type == ARG
 			|| current->type == PATH || current->type == DELIM)
-		{
-			new_str = ft_calloc(ft_strlen(current->str) + 1, sizeof(char));
-			i = 0;
-			j = 0;
-			quote = 0;
-			while (current->str[i])
-			{
-				if (current->str[i] == '\'' || current->str[i] == '\"')
-				{
-					if (quote == 0)
-						quote = current->str[i];
-					else if (quote == current->str[i])
-						quote = 0;
-				}
-				else
-					new_str[j++] = current->str[i];
-				i++;
-			}
-			new_str[j] = '\0';
-			free(current->str);
-			current->str = new_str;
-		}
+			newstr_maker(current, new_str);
 		current = current->next;
 	}
 }

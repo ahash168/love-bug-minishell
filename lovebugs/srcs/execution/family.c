@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:53:57 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 19:54:34 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 23:30:17 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	child(t_mini *shell, t_cmd *current)
 	shell->env_arr = list_to_array(shell->env_list);
 	exec_single(shell, current);
 	free_shell(shell);
-	exit(1);
+	exit(127);
 }
 
 void	parent(t_mini *shell, t_cmd *current)

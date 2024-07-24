@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:24:33 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 16:04:18 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 23:32:18 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ char	**get_path(char **env)
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 			break ;
 		i++;
+	}
+	if (env[i] == NULL)
+	{
+		printf("command{path} not found\n");
+		exit(2);
 	}
 	paths = ft_split(env[i] + 5, ':');
 	i = 0;
@@ -50,6 +55,8 @@ void	path_checker(char **cmd, char **env)
 		free(command);
 		i++;
 	}
+	if (paths[i] == NULL)
+		printf("cmd not found\n");
 }
 
 char	**cmd_validator(char **cmd, char **env)

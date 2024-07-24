@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 20:22:47 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 22:28:57 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ enum e_type
 	DELIM
 };
 
+typedef struct sigaction	t_sigaction;
+
+int							g_recived_signal;
+
 typedef struct s_cmd
 {
 	char			**cmd;
@@ -87,6 +91,7 @@ typedef struct s_mini
 	char			**env_arr;
 	struct s_env	*env_list;
 	int				pipe_fd[2];
+	int				exit_status;
 }					t_mini;
 
 char	**arrcopy(char **arr);
@@ -141,6 +146,8 @@ void	free_s_env(t_env *env);
 void	init_shell(t_mini *shell);
 void	reset_shell(t_mini *shell);
 void	free_shell(t_mini *shell);
+
+void	init_sigaction(t_mini *shell);
 
 # ifndef MAX_PATH
 #  define MAX_PATH 256
