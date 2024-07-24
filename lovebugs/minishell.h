@@ -6,7 +6,7 @@
 /*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/23 21:18:29 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/24 12:58:40 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,12 @@ void	print_cmds(t_cmd *head);
 void	init_redir(t_mini *shell);
 
 int		execution(t_mini *shell);
-void	exec_single(t_mini *shell);
-void	exec_multiple(t_cmd *cmds, t_env *my_env, char **env, t_mini *shell);
-void	set_redir(t_cmd *cmd);
+void	exec_single(t_mini *shell, t_cmd *cmds);
+void	set_redir(t_mini *shell, t_cmd *current);
 char	**cmd_validator(char **cmd, char **env);
 
 int		is_builtin(char *input);
-int		exec_builtin(t_mini *shell);
+int		exec_builtin(t_mini *shell, t_cmd *cmds);
 
 void	ft_exit_shell(t_mini *shell, int error, char *p_err, int fd);
 void	free_shell(t_mini *shell);

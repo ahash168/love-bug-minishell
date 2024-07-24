@@ -6,7 +6,7 @@
 #    By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/22 00:02:49 by busragordag      ###   ########.fr        #
+#    Updated: 2024/07/24 12:59:05 by busragordag      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
 			parsing/join_tokens.c parsing/expand_var.c parsing/handle_quotes.c \
 			parsing/init_cmds.c parsing/init_redir.c parsing/init_env.c\
-			execution/execution.c execution/exec_single.c execution/exec_multiple.c \
+			execution/execution.c execution/exec_single.c \
 			fd_close.c
 			
 

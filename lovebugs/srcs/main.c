@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 16:29:45 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 00:13:55 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	reset_shell(t_mini *shell)
 	if (shell->env_arr)
 	{
 		freeer(shell->env_arr);
-		shell->env_arr = NULL;		
+		shell->env_arr = NULL;
 	}
 	shell->cmd_count = 0;
 	shell->pipe_fd[0] = 0;

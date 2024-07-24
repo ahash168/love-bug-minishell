@@ -35,6 +35,8 @@ void	handle_heredoc(t_cmd *cmd, char *delim)
 	close(tmp_fd);
 	tmp_fd = open("tmp_file.tmp", O_RDONLY);
 	unlink("tmp_file.tmp");
+	if (cmd->in != 0 && cmd->in != -1)
+		close(cmd->in);
 	cmd->in = tmp_fd;
 }
 
@@ -52,6 +54,11 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 			close(cmd->out);
 		fd = open(token->next->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		printf("app: %d, file: %s\n", fd, token->next->str);
+		if (fd == -1)
+		{
+			cmd->cmd = NULL;
+			return ;
+		}
 		cmd->out = fd;
 	}
 	else if (!ft_strncmp(str, "<<", 2))
@@ -65,6 +72,11 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 			close(cmd->in);
 		fd = open(token->next->str, O_RDONLY);
 		printf("in: %d, file: %s\n", fd, token->next->str);
+		if (fd == -1)
+		{
+			cmd->cmd = NULL;
+			return ;
+		}
 		cmd->in = fd;
 	}
 	else if (!ft_strncmp(str, ">", 1))
@@ -73,6 +85,11 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 			close(cmd->out);
 		fd = open(token->next->str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		printf("out: %d, file: %s\n", fd, token->next->str);
+		if (fd == -1)
+		{
+			cmd->cmd = NULL;
+			return ;
+		}
 		cmd->out = fd;
 	}
 }

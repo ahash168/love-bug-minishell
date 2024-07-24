@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:21:00 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/19 18:37:00 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:55:22 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int	parsing(t_mini *shell)
 
 	quote_remover(shell);
 	// printf("\nsixth\n");
-	print_tokens(shell->tokens);
+	// print_tokens(shell->tokens);
 
 	init_cmds(shell);
 	// printf("\nfirst\n");
@@ -175,6 +175,6 @@ int	parsing(t_mini *shell)
 
 	init_redir(shell);
 	// printf("\nsecond\n");
-	print_cmds(shell->cmds);
+	// print_cmds(shell->cmds);
 	return (0);
 }
