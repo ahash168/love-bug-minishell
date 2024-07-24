@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:18 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/23 18:31:37 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/24 15:57:40 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	swap_content(t_list *a, t_list *b)
-{
-	void	*temp;
-
-	temp = a->content;
-	a->content = b->content;
-	b->content = temp;
-}
 
 int	check_export_args(char *arg)
 {
@@ -111,4 +102,4 @@ void	ft_export(char **args, t_mini *mini)
 		g_exit_code = EXPORT_FAIL_CODE;
 	else
 		g_exit_code = 0;
-} 
+}

@@ -12,7 +12,28 @@
 
 #include "../../minishell.h"
 
-void	init_env(char **env, t_env **my_env)
+void	increase_shlvl(t_env *my_env, t_mini *shell)
+{
+	char	*args_str;
+	char	**args;
+	int		level;
+
+	args_str = NULL;
+	args = NULL;
+	level = ft_atoi(ft_getenv("SHLVL", my_env)) + 1;
+	if (level >= 1000)
+		level = 0;
+	args_str = malloc(sizeof(char) * 17);
+	args_str = ft_strdup("export SHLVL=");
+	args_str = ft_strjoin(args_str, ft_itoa(level), 1);
+	args_str[ft_strlen(args_str)] = '\0';
+	args = ft_split(args_str, ' ');
+	free(args_str);
+	ft_export(args, shell);
+	freeer(args);
+}
+
+void	init_env(char **env, t_env **my_env, t_mini *shell)
 {
 	int		i;
 	t_env	*new_var;
@@ -37,4 +58,5 @@ void	init_env(char **env, t_env **my_env)
 		i++;
 	}
 	last_var->next = NULL;
+	increase_shlvl(*my_env, shell);
 }

@@ -6,19 +6,11 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 16:32:30 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/17 23:19:14 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/24 19:16:25 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-typedef struct s_trim
-{
-	size_t		i;
-	size_t		j;
-	size_t		x;
-	char		*str;
-}					t_trim;
 
 static int	compare(char c, char *str)
 {

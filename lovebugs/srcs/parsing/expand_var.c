@@ -12,46 +12,55 @@
 
 #include "../../minishell.h"
 
-char *var_expansion(char *str)
+char	*var_expansion(char *str, t_mini *shell)
 {
-	char *expanded = calloc(1024, sizeof(char)); // Allocate enough space
-	int i = 0, j = 0;
-	char var_name[256]; // Assuming variable names are not longer than 255 characters
+	char	*expanded;
+	char	var_name[256];
+	char	*var_value;
+	int		i;
+	int		j;
+	int		k;
 
+	i = 0;
+	j = 0;
+	expanded = ft_calloc(1024, sizeof(char));
 	while (str[i])
 	{
 		if (str[i] == '$')
 		{
 			i++;
-			int k = 0;
-			while (str[i] && (isalnum(str[i]) || str[i] == '_'))
-			{
+			k = 0;
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 				var_name[k++] = str[i++];
-			}
 			var_name[k] = '\0';
-			char *var_value = getenv(var_name);
+			var_value = ft_getenv(var_name, shell->env_list);
 			if (var_value)
 			{
-				strcpy(&expanded[j], var_value);
-				j += strlen(var_value);
+				ft_strcpy(&expanded[j], var_value);
+				j += ft_strlen(var_value);
 			}
 		}
 		else
-		{
 			expanded[j++] = str[i++];
-		}
 	}
 	expanded[j] = '\0';
-	return expanded;
+	return (expanded);
 }
 
-char *expand_with_single_quotes(char *str)
+char	*expand_with_single_quotes(char *str, t_mini *shell)
 {
-	char *expanded = calloc(1024, sizeof(char)); // Allocate enough space
-	int i = 0, j = 0;
-	int in_single_quote = 0;
-	char var_name[256]; // Assuming variable names are not longer than 255 characters
+	char	*expanded;
+	int		i;
+	int		j;
+	int		k;
+	int		in_single_quote;
+	char	var_name[256];
+	char	*var_value;
 
+	in_single_quote = 0;
+	i = 0;
+	j = 0;
+	expanded = ft_calloc(1024, sizeof(char));
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -62,119 +71,45 @@ char *expand_with_single_quotes(char *str)
 		else if (str[i] == '$' && !in_single_quote)
 		{
 			i++;
-			int k = 0;
-			while (str[i] && (isalnum(str[i]) || str[i] == '_'))
-			{
+			k = 0;
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 				var_name[k++] = str[i++];
-			}
 			var_name[k] = '\0';
-			char *var_value = getenv(var_name);
+			var_value = ft_getenv(var_name, shell->env_list);
 			if (var_value)
 			{
-				strcpy(&expanded[j], var_value);
-				j += strlen(var_value);
+				ft_strcpy(&expanded[j], var_value);
+				j += ft_strlen(var_value);
 			}
 		}
 		else
-		{
 			expanded[j++] = str[i++];
-		}
 	}
 	expanded[j] = '\0';
-	return expanded;
+	return (expanded);
 }
 
-// char *var_expansion(char *str)
-// {
-//     char *expanded = calloc(1024, sizeof(char)); // Allocate enough space
-//     int i = 0, j = 0;
-//     char var_name[256]; // Assuming variable names are not longer than 255 characters
-//     char quote = 0; // To track current quote type
-
-//     while (str[i])
-//     {
-//         if (str[i] == '\'' && quote == '\"')
-//         {
-//             // Keep the single quote inside double quotes
-//             expanded[j++] = str[i++];
-//         }
-//         else if (str[i] == '\'' || str[i] == '\"')
-//         {
-//             if (quote == 0)
-//                 quote = str[i]; // Open a quote
-//             else if (quote == str[i])
-//                 quote = 0; // Close the quote
-//             i++; // Skip the quote character
-//         }
-//         else if (str[i] == '$' && quote != '\'')
-//         {
-//             i++;
-//             int k = 0;
-//             while (str[i] && (isalnum(str[i]) || str[i] == '_'))
-//             {
-//                 var_name[k++] = str[i++];
-//             }
-//             var_name[k] = '\0';
-//             char *var_value = getenv(var_name);
-//             if (var_value)
-//             {
-//                 strcpy(&expanded[j], var_value);
-//                 j += strlen(var_value);
-//             }
-//         }
-//         else
-//         {
-//             expanded[j++] = str[i++];
-//         }
-//     }
-//     expanded[j] = '\0';
-//     return expanded;
-// }
-
-void expand_var(t_mini *shell)
+void	expand_var(t_mini *shell)
 {
-	t_token *current;
-	char *new_str;
+	t_token	*current;
+	char	*new_str;
 
 	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == DOUBLE || current->type == VAR)
 		{
-			new_str = var_expansion(current->str);
+			new_str = var_expansion(current->str, shell);
 			free(current->str);
 			current->str = new_str;
 		}
-		else if (current->type == PATH || current->type == ARG || current->type == CMD)
+		else if (current->type == PATH || current->type == ARG
+				|| current->type == CMD)
 		{
-			new_str = expand_with_single_quotes(current->str);
+			new_str = expand_with_single_quotes(current->str, shell);
 			free(current->str);
 			current->str = new_str;
 		}
 		current = current->next;
 	}
 }
-
-// void	expand_var(t_token *shell->tokens)
-// {
-// 	t_token	*current;
-// 	char	*new_str;
-
-// 	current = tokens;
-// 	while (current)
-// 	{
-// 		if (current->type == DOUBLE || current->type == VAR)
-// 		{
-// 			new_str = var_expansion(current->str);
-// 			free(current->str);
-// 			current->str = new_str;
-// 		}
-// 		else if (current->type == WORD)
-// 		{
-// 			new_str = var_expansion(current->str);
-// 			free(current->str);
-// 			current->str = new_str;
-// 		}
-// 		current = current->next;
-// 	}
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:02:43 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/24 12:58:25 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/24 19:09:24 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_builtin(char *cmd)
 	if (ft_strncmp(cmd, "echo", 5) == 0 || ft_strncmp(cmd, "cd", 3) == 0 \
 	|| ft_strncmp(cmd, "pwd", 4) == 0 || ft_strncmp(cmd, "export", 7) == 0 \
 	|| ft_strncmp(cmd, "unset", 6) == 0 || ft_strncmp(cmd, "env", 4) == 0 \
-	|| ft_strncmp(cmd, "exit", 5) == 0 || ft_strncmp(cmd, "ECHO", 5) == 0\
+	|| ft_strncmp(cmd, "exit", 5) == 0 || ft_strncmp(cmd, "ECHO", 5) == 0 \
 	|| ft_strncmp(cmd, "PWD", 4) == 0 || ft_strncmp(cmd, "ENV", 4) == 0)
 		builtin = 0;
 	return (builtin);
@@ -28,7 +28,6 @@ int	is_builtin(char *cmd)
 
 int	exec_builtin(t_mini *shell, t_cmd *cmds)
 {
-	// (void) env;
 	if (ft_strncmp(cmds->cmd[0], "echo", 5) == 0 \
 	|| ft_strncmp(cmds->cmd[0], "ECHO", 5) == 0)
 		ft_echo(cmds->cmd);

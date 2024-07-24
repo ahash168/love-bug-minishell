@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 12:58:40 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/24 20:22:47 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "./libft/libft.h"
-// # include "./builtins/builtins.h"
 # include "gnl/get_next_line_bonus.h"
 
 # include <stdbool.h>
@@ -39,20 +38,6 @@
 # include <limits.h>
 # include <ctype.h>
 
-#define RESET "\033[0m"
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define YELLOW "\033[33m"
-#define BLUE "\033[34m"
-#define MAGENTA "\033[201m"
-#define CYAN "\033[36m"
-#define BOLD "\033[1m"
-#define UNDERLINE "\033[4m"
-
-typedef struct sigaction	t_sigaction;
-
-int							g_recived_signal;
-
 enum e_type
 {
 	SPACES,
@@ -73,7 +58,6 @@ typedef struct s_cmd
 	char			**cmd;
 	int				in;
 	int				out;
-	// int				count;
 	int				pid;
 	struct s_cmd	*next;
 	t_list			*args;
@@ -117,14 +101,16 @@ int		ft_strset(char *str, char *set);
 int		ft_charset(char strc, char *set);
 int		strchar_count(char *str, char c);
 
-void	init_env(char **env, t_env **my_env);
+void	init_env(char **env, t_env **my_env, t_mini *shell);
 
 int		parsing(t_mini *shell);
+void	name_token(char *input, t_token *token);
 void	parse_tokens(t_mini *shell);
 void	rename_tokens(t_mini *shell);
 void	join_tokens(t_mini *shell);
 void	expand_var(t_mini *shell);
 void	print_tokens(t_token *head);
+t_cmd	*cmd_maker(t_token *tokens);
 
 void	quote_checker(t_mini *shell);
 void	quote_remover(t_mini *shell);
@@ -134,14 +120,26 @@ void	print_cmds(t_cmd *head);
 void	init_redir(t_mini *shell);
 
 int		execution(t_mini *shell);
+char	**list_to_array(t_env *my_env);
 void	exec_single(t_mini *shell, t_cmd *cmds);
 void	set_redir(t_mini *shell, t_cmd *current);
 char	**cmd_validator(char **cmd, char **env);
+
+void	child(t_mini *shell, t_cmd *current);
+void	parent(t_mini *shell, t_cmd *current);
 
 int		is_builtin(char *input);
 int		exec_builtin(t_mini *shell, t_cmd *cmds);
 
 void	ft_exit_shell(t_mini *shell, int error, char *p_err, int fd);
+void	free_shell(t_mini *shell);
+
+void	free_s_cmd(t_cmd *cmds);
+void	free_s_token(t_token *tokens);
+void	free_s_env(t_env *env);
+
+void	init_shell(t_mini *shell);
+void	reset_shell(t_mini *shell);
 void	free_shell(t_mini *shell);
 
 # ifndef MAX_PATH
@@ -167,7 +165,8 @@ int		ft_echo(char **input);
 int		ft_env(t_env *my_env);
 int		ft_pwd(void);
 void	ft_cd(char **input, t_env *my_env);
-void 	ft_exit(char **args, t_mini *mini);
+char	*ft_getenv(char *key, t_env *my_env);
+void	ft_exit(char **args, t_mini *mini);
 void	ft_unset(char **args, t_mini *mini);
 void	ft_export(char **args, t_mini *mini);
 void	parse_new_export(char *arg, t_mini *mini);
@@ -179,8 +178,5 @@ void	add_to_env(char *arg, t_mini *mini);
 char	*set_env_value(char *arg, t_env *new);
 char	*set_env_key(char *arg);
 void	print_export(t_mini *mini);
-
-
-
 
 #endif

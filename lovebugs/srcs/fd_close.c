@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fd_close.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 15:17:01 by ahashem           #+#    #+#             */
+/*   Updated: 2024/07/24 16:25:03 by ahashem          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-int ft_close(int fd, int limit, t_cmd *cmd)
+int	ft_close(int fd, int limit, t_cmd *cmd)
 {
-	int ret;
+	int	ret;
 
 	if (fd >= limit)
 	{
@@ -18,6 +30,18 @@ int ft_close(int fd, int limit, t_cmd *cmd)
 			return (-2);
 	}
 	return (-2);
+}
+
+void	ft_exit_shell(t_mini *shell, int error, char *p_err, int fd)
+{
+	g_exit_code = error;
+	if (p_err)
+		fd_printf(fd, "%s\n", p_err);
+	free_shell(shell);
+	ft_close(0, 0, NULL);
+	ft_close(1, 0, NULL);
+	ft_close(2, 0, NULL);
+	exit(g_exit_code);
 }
 
 // void close_all_fds(t_mini *mini)
@@ -44,16 +68,3 @@ int ft_close(int fd, int limit, t_cmd *cmd)
 // 		cmd = cmd->next;
 // 	}
 // }
-
-void ft_exit_shell(t_mini *shell, int error, char *p_err, int fd)
-{
-	g_exit_code = error;
-	if (p_err)
-		fd_printf(fd, "%s\n", p_err);
-	// close_all_fds(shell);
-	free_shell(shell);
-	ft_close(0, 0, NULL);
-	ft_close(1, 0, NULL);
-	ft_close(2, 0, NULL);
-	exit(g_exit_code);
-}

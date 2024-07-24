@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/24 15:52:50 by ahashem           #+#    #+#             */
+/*   Updated: 2024/07/24 15:54:04 by ahashem          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	print_export(t_mini *mini)
@@ -53,12 +65,12 @@ char	*set_env_value(char *arg, t_env *new)
 	value = ft_strchr(arg, '=');
 	if (value == NULL)
 	{
-		new->init = 0;  // initialised yerine init
+		new->init = 0;
 		return (ft_strdup(""));
 	}
 	else
 	{
-		new->init = 1;  // initialised yerine init
+		new->init = 1;
 		value++;
 		return (ft_strdup(value));
 	}
@@ -73,7 +85,7 @@ void	add_to_env(char *arg, t_mini *mini)
 	new = ft_calloc(1, sizeof(t_env));
 	new->next = NULL;
 	new->value = set_env_value(arg, new);
-	new->var = set_env_key(arg);  // key yerine var
+	new->var = set_env_key(arg);
 	if (temp == NULL)
 	{
 		mini->env_list = new;

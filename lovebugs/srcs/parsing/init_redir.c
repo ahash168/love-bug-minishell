@@ -40,6 +40,38 @@ void	handle_heredoc(t_cmd *cmd, char *delim)
 	cmd->in = tmp_fd;
 }
 
+void	handle_infile(t_cmd *cmd, t_token *token)
+{
+	int	fd;
+
+	if (cmd->in != 0 && cmd->in != -1)
+		close(cmd->in);
+	fd = open(token->next->str, O_RDONLY);
+	printf("in: %d, file: %s\n", fd, token->next->str);
+	if (fd == -1)
+	{
+		cmd->cmd = NULL;
+		return ;
+	}
+	cmd->in = fd;
+}
+
+void	handle_outfile(t_cmd *cmd, t_token *token)
+{
+	int	fd;
+
+	if (cmd->out != 1 && cmd->out != -1)
+		close(cmd->out);
+	fd = open(token->next->str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	printf("out: %d, file: %s\n", fd, token->next->str);
+	if (fd == -1)
+	{
+		cmd->cmd = NULL;
+		return ;
+	}
+	cmd->out = fd;
+}
+
 void	fill_redir(t_cmd *cmd, t_token *token)
 {
 	int			fd;
@@ -62,36 +94,11 @@ void	fill_redir(t_cmd *cmd, t_token *token)
 		cmd->out = fd;
 	}
 	else if (!ft_strncmp(str, "<<", 2))
-	{
-		printf("heredoc \n");
 		handle_heredoc(cmd, token->next->str);
-	}
 	else if (!ft_strncmp(str, "<", 1))
-	{
-		if (cmd->in != 0 && cmd->in != -1)
-			close(cmd->in);
-		fd = open(token->next->str, O_RDONLY);
-		printf("in: %d, file: %s\n", fd, token->next->str);
-		if (fd == -1)
-		{
-			cmd->cmd = NULL;
-			return ;
-		}
-		cmd->in = fd;
-	}
+		handle_infile(cmd, token);
 	else if (!ft_strncmp(str, ">", 1))
-	{
-		if (cmd->out != 1 && cmd->out != -1)
-			close(cmd->out);
-		fd = open(token->next->str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		printf("out: %d, file: %s\n", fd, token->next->str);
-		if (fd == -1)
-		{
-			cmd->cmd = NULL;
-			return ;
-		}
-		cmd->out = fd;
-	}
+		handle_outfile(cmd, token);
 }
 
 void	init_redir(t_mini *shell)
@@ -110,17 +117,7 @@ void	init_redir(t_mini *shell)
 			current_token = current_token->next;
 		}
 		if (current_token && current_token->type == PIPE)
-            current_token = current_token->next;
+			current_token = current_token->next;
 		current_cmd = current_cmd->next;
 	}
 }
-	// current_cmd = cmds;
-	// while (current_cmd)
-	// {
-	// 	if (current_cmd->in != 0)
-	// 		close(current_cmd->in);
-	// 	if (current_cmd->out != 1)
-	// 		close(current_cmd->out);
-	// 	current_cmd = current_cmd->next;
-	// }
-// }
