@@ -6,12 +6,11 @@
 /*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:02:43 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/21 02:42:02 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/22 00:06:33 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "../builtins/builtins.h"
 
 int	is_builtin(char *cmd)
 {
@@ -38,8 +37,8 @@ int	exec_builtin(t_mini *shell)
 	else if (ft_strncmp(shell->cmds->cmd[0], "pwd", 4) == 0 \
 	|| ft_strncmp(shell->cmds->cmd[0], "PWD", 4) == 0)
 		ft_pwd();
-	// else if (ft_strncmp(shell->cmds->cmd[0], "export", 7) == 0)
-	// 	ft_export();
+	else if (ft_strncmp(shell->cmds->cmd[0], "export", 7) == 0)
+		ft_export(shell->cmds->cmd, shell);
 	else if (ft_strncmp(shell->cmds->cmd[0], "unset", 6) == 0)
 		ft_unset(shell->cmds->cmd, shell);
 	else if (ft_strncmp(shell->cmds->cmd[0], "env", 4) == 0 \

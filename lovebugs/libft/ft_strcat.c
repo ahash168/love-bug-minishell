@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:06:14 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/23 18:34:29 by busragordag      ###   ########.fr       */
+/*   Created: 2024/06/22 13:43:51 by ahashem           #+#    #+#             */
+/*   Updated: 2024/07/21 23:20:47 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-int	ft_env(t_env *my_env)
+char	*ft_strcat(char *dest, char *src)
 {
-	t_env	*current;
+	unsigned int	i;
+	unsigned int	j;
 
-	current = my_env;
-	while (current)
+	i = 0;
+	while (dest[i] != '\0')
 	{
-		if (current->init == 1)
-		{
-			ft_putstr_fd(current->var, 1);
-			ft_putstr_fd("=", 1);
-			ft_putendl_fd(current->value, 1);
-		}
-		current = current->next;
+		i++;
 	}
-	return (0);
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }

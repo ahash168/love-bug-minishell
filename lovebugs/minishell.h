@@ -6,7 +6,7 @@
 /*   By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/21 03:04:12 by busragordag      ###   ########.fr       */
+/*   Updated: 2024/07/23 21:18:29 by busragordag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@
 #define BOLD "\033[1m"
 #define UNDERLINE "\033[4m"
 
+typedef struct sigaction	t_sigaction;
+
+int							g_recived_signal;
+
 enum e_type
 {
 	SPACES,
@@ -72,6 +76,7 @@ typedef struct s_cmd
 	// int				count;
 	int				pid;
 	struct s_cmd	*next;
+	t_list			*args;
 }					t_cmd;
 
 typedef struct s_token
@@ -144,6 +149,7 @@ void	free_shell(t_mini *shell);
 #  define MAX_PATH 256
 # endif
 
+# define BUFF_SIZE 4096
 # define PWD_FAIL_CODE 2
 # define ENV_FAIL_CODE 1
 # define EXPORT_FAIL_CODE 1
@@ -164,5 +170,18 @@ int		ft_pwd(void);
 void	ft_cd(char **input, t_env *my_env);
 void 	ft_exit(char **args, t_mini *mini);
 void	ft_unset(char **args, t_mini *mini);
+void	ft_export(char **args, t_mini *mini);
+void	parse_new_export(char *arg, t_mini *mini);
+void	ft_modify_env(char *arg, t_mini *mini);
+t_env	*env_already_exist(char *arg, t_mini *mini);
+int		check_export_args(char *arg);
+int		check_valid_identifier(char *arg);
+void	add_to_env(char *arg, t_mini *mini);
+char	*set_env_value(char *arg, t_env *new);
+char	*set_env_key(char *arg);
+void	print_export(t_mini *mini);
+
+
+
 
 #endif
