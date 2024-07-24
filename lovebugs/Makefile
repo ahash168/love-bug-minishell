@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
+#    By: busragordag <busragordag@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/22 18:07:42 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/24 12:59:05 by busragordag      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBFT	=	libft/ft_isprint.c libft/ft_putchar_fd.c libft/ft_strjoin.c \
 
 GNL		=	gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c
 
-BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
+BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c export_utils.c
 
 SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
 			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
