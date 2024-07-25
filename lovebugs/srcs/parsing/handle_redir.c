@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 21:05:27 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/25 22:11:14 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/26 00:30:13 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	handle_infile(t_cmd *cmd, t_token *token)
 	if (cmd->in != 0)
 		close(cmd->in);
 	fd = open(token->next->str, O_RDONLY);
-	printf("in: %d, file: %s\n", fd, token->next->str);
 	cmd->in = fd;
 }
 
@@ -62,7 +61,6 @@ void	handle_outfile(t_cmd *cmd, t_token *token)
 	if (cmd->out != 1)
 		close(cmd->out);
 	fd = open(token->next->str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("out: %d, file: %s\n", fd, token->next->str);
 	cmd->out = fd;
 }
 
@@ -75,6 +73,5 @@ void	handle_appendfile(t_cmd *cmd, t_token *token)
 	if (cmd->out != 1)
 		close(cmd->out);
 	fd = open(token->next->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	printf("app: %d, file: %s\n", fd, token->next->str);
 	cmd->out = fd;
 }
