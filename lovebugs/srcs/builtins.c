@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:02:43 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/24 23:25:21 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 21:18:05 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	is_builtin(char *cmd)
 
 	builtin = 1;
 	i = 0;
+	if (!cmd || !cmd[0])
+		return (1);
 	while (cmd[i])
 	{
 		cmd[i] = ft_tolower(cmd[i]);

@@ -6,7 +6,7 @@
 #    By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 17:51:32 by ahashem           #+#    #+#              #
-#    Updated: 2024/07/24 23:27:22 by ahashem          ###   ########.fr        #
+#    Updated: 2024/07/25 23:56:46 by ahashem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,25 +34,29 @@ GNL		=	gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c
 BLT		=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c export_utils.c
 
 SRCC	=	main.c arr_utils.c error.c builtins.c builtin_utils.c\
-			parsing/parsing.c parsing/parse_tokens.c parsing/rename_tokens.c \
-			parsing/join_tokens.c parsing/expand_var.c parsing/handle_quotes.c parsing/name_token.c \
-			parsing/init_cmds.c parsing/init_redir.c parsing/init_env.c parsing/cmd_maker.c \
-			execution/execution.c execution/exec_single.c execution/family.c \
-			fd_close.c shell_handling.c freeing.c #signal.c
+			parsing/parsing.c parsing/tokenizer.c parsing/parse_tokens.c \
+			parsing/rename_tokens.c parsing/join_tokens.c parsing/expand_var.c \
+			parsing/handle_quotes.c parsing/name_token.c parsing/var_utils.c parsing/init_cmds.c \
+			parsing/init_redir.c parsing/handle_redir.c parsing/init_env.c parsing/cmd_maker.c \
+			execution/execution.c execution/exec_single.c execution/family.c execution/envarr_maker.c \
+			exit_shell.c shell_handling.c freeing.c signal.c
 			
 
 SRC 	= 	$(addprefix libft/, $(LIBFT)) $(GNL) $(addprefix srcs/, $(SRCC)) $(addprefix builtins/, $(BLT))
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror -I /usr/local/opt/readline/include -fsanitize=address -g3
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 
-LRLFLAG =	-lreadline -L /usr/local/lib
+LRLFLAG =	-L /Users/ahashem/homebrew/opt/readline/lib/ -lreadline
 
 all		:	$(NAME)
 
-$(NAME)	:	$(OBJ) minishell.h
-			cc $(CFLAGS) $(OBJ) $(LRLFLAG) -o $(NAME)
+$(NAME)	:	$(OBJ)
+			cc $(CFLAGS) $(OBJ) $(LRLFLAG) -I/minishell.h -o $(NAME)
+
+%.o		:	%.c
+			$(CC) $(CFLAGS) -c  -I/Users/ahashem/homebrew/opt/readline/include/  -I ./ $< -o $@
 
 clean	:
 			rm -rf $(OBJ)
@@ -63,4 +67,3 @@ fclean	:	clean
 re		:	fclean all
 
 .PHONY	:	all clean fclean re
-

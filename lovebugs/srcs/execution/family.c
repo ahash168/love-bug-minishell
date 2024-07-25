@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:53:57 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 23:30:17 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 22:08:47 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	child(t_mini *shell, t_cmd *current)
 {
-	set_redir(shell, current);
+	if (set_redir(shell, current))
+		exit(1);
 	if (shell->cmd_count > 1)
 	{
 		close(shell->pipe_fd[0]);
@@ -30,14 +31,16 @@ void	child(t_mini *shell, t_cmd *current)
 
 void	parent(t_mini *shell, t_cmd *current)
 {
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	if (shell->cmd_count > 1)
 	{
 		close(shell->pipe_fd[1]);
 		dup2(shell->pipe_fd[0], 0);
 		close(shell->pipe_fd[0]);
 	}
-	if (current->out != 1)
+	if (current->out != 1 && current->in != -1)
 		close(current->out);
-	if (current->in != 0)
+	if (current->in != 0 && current->in != -1)
 		close(current->in);
 }

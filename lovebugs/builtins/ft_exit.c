@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:16 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/24 15:56:34 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 22:16:26 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,28 @@ int	check_exit_alpha(char **args)
 	return (0);
 }
 
-void	ft_exit(char **args, t_mini *mini)
+void	ft_exit(char **args, t_mini *shell)
 {
 	int	code;
 
 	code = 0;
-	if (!args[1] && !mini->cmds->next)
-		ft_exit_shell(mini, 0, "exit", 2);
+	if (!args[1] && !shell->cmds->next)
+		ft_exit_shell(shell, 0, "exit", 2);
 	else if (!args[1])
-		ft_exit_shell(mini, 0, NULL, 2);
+		ft_exit_shell(shell, 0, NULL, 2);
 	else if (ft_isdigit(args[1][0]) && arg_count(args) > 2)
 	{
 		fd_printf(2, "exit\n");
 		fd_printf(2, "minishell: exit: too many arguments\n");
-		g_exit_code = 1;
+		shell->exit_status = 1;
 		return ;
 	}
 	if (check_exit_alpha(&args[1]))
 		code = 2;
 	else
 		code = ft_atoi(args[1]) % 256;
-	if (mini->cmds->next)
-		ft_exit_shell(mini, code, NULL, 2);
+	if (shell->cmds->next)
+		ft_exit_shell(shell, code, NULL, 2);
 	else
-		ft_exit_shell(mini, code, "exit", 2);
+		ft_exit_shell(shell, code, "exit", 2);
 }

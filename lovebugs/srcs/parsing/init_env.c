@@ -14,7 +14,7 @@
 
 char	**add_basic_env(t_mini *shell)
 {
-	char	**envp;
+	char	**env;
 	char	cwd[2056];
 	char	*pwd;
 	char	*full_env;
@@ -28,11 +28,11 @@ char	**add_basic_env(t_mini *shell)
 	if (!full_env)
 		return (NULL);
 	free(pwd);
-	envp = ft_split(full_env, ' ');
-	if (!envp)
+	env = ft_split(full_env, ' ');
+	if (!env)
 		ft_exit_shell(shell, 1, "add_basic_env", 2);
 	free(full_env);
-	return (envp);
+	return (env);
 }
 
 void	increase_shlvl(t_env *my_env, t_mini *shell)
@@ -43,12 +43,17 @@ void	increase_shlvl(t_env *my_env, t_mini *shell)
 
 	args_str = NULL;
 	args = NULL;
-	level = ft_atoi(ft_getenv("SHLVL", my_env)) + 1;
-	if (level >= 1000)
-		level = 0;
 	args_str = malloc(sizeof(char) * 17);
 	args_str = ft_strdup("export SHLVL=");
-	args_str = ft_strjoin(args_str, ft_itoa(level), 1);
+	if (ft_getenv("SHLVL", my_env) == NULL)
+		args_str = ft_strjoin(args_str, "1", 1);
+	else
+	{
+		level = ft_atoi(ft_getenv("SHLVL", my_env)) + 1;
+		if (level >= 1000)
+			level = 0;
+		args_str = ft_strjoin(args_str, ft_itoa(level), 1);
+	}
 	args_str[ft_strlen(args_str)] = '\0';
 	args = ft_split(args_str, ' ');
 	free(args_str);

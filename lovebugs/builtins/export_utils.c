@@ -6,21 +6,21 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:52:50 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 15:54:04 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 22:13:07 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_export(t_mini *mini)
+void	print_export(t_mini *shell)
 {
 	t_env	*env;
 
-	env = mini->env_list;
+	env = shell->env_list;
 	if (!env)
 	{
 		fd_printf(2, "env: permission denied\n");
-		g_exit_code = ENV_FAIL_CODE;
+		shell->exit_status = ENV_FAIL_CODE;
 		return ;
 	}
 	while (env)
@@ -36,7 +36,7 @@ void	print_export(t_mini *mini)
 			fd_printf(1, "declare -x %s\n", env->var);
 		env = env->next;
 	}
-	g_exit_code = 0;
+	shell->exit_status = 0;
 }
 
 char	*set_env_key(char *arg)
@@ -76,19 +76,19 @@ char	*set_env_value(char *arg, t_env *new)
 	}
 }
 
-void	add_to_env(char *arg, t_mini *mini)
+void	add_to_env(char *arg, t_mini *shell)
 {
 	t_env	*temp;
 	t_env	*new;
 
-	temp = mini->env_list;
+	temp = shell->env_list;
 	new = ft_calloc(1, sizeof(t_env));
 	new->next = NULL;
 	new->value = set_env_value(arg, new);
 	new->var = set_env_key(arg);
 	if (temp == NULL)
 	{
-		mini->env_list = new;
+		shell->env_list = new;
 	}
 	else
 	{

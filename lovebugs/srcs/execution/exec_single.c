@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 19:24:33 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 23:32:18 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/26 00:04:31 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	path_checker(char **cmd, char **env)
 		free(command);
 		i++;
 	}
-	if (paths[i] == NULL)
-		printf("cmd not found\n");
 }
 
 char	**cmd_validator(char **cmd, char **env)

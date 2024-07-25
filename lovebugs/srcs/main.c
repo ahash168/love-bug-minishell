@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:34:07 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 23:19:31 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 23:24:40 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	main(int ac, char **av, char **env)
 	t_mini	*shell;
 
 	(void) av;
-	if (ac != 1 || !*env)
+	if (ac != 1)
 		return (1);
 	shell = ft_calloc(1, sizeof(t_mini));
 	init_shell(shell);
 	init_env(env, &(shell->env_list), shell);
 	while (1)
 	{
-		// init_sigaction(shell);
+		init_sigaction(shell);
 		shell->input = readline("minishell> ");
 		if (!shell->input)
 			break ;

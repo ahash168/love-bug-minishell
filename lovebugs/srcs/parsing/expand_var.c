@@ -12,81 +12,55 @@
 
 #include "../../minishell.h"
 
+void	exit_code_var(t_expand *exp, t_mini *shell)
+{
+	exp->i++;
+	if (exp->str[exp->i] == '?')
+	{
+		append_var_value(exp, ft_itoa(shell->exit_status));
+		exp->i++;
+	}
+	else
+		get_env_var(exp, shell);
+}
+
 char	*var_expansion(char *str, t_mini *shell)
 {
-	char	*expanded;
-	char	var_name[256];
-	char	*var_value;
-	int		i;
-	int		j;
-	int		k;
+	t_expand	exp;
 
-	i = 0;
-	j = 0;
-	expanded = ft_calloc(1024, sizeof(char));
-	while (str[i])
+	init_expansion(&exp, str, shell);
+	while (exp.str[exp.i])
 	{
-		if (str[i] == '$')
-		{
-			i++;
-			k = 0;
-			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-				var_name[k++] = str[i++];
-			var_name[k] = '\0';
-			var_value = ft_getenv(var_name, shell->env_list);
-			if (var_value)
-			{
-				ft_strcpy(&expanded[j], var_value);
-				j += ft_strlen(var_value);
-			}
-		}
+		if (exp.str[exp.i] == '$')
+			exit_code_var(&exp, shell);
 		else
-			expanded[j++] = str[i++];
+			exp.expanded[exp.j++] = exp.str[exp.i++];
 	}
-	expanded[j] = '\0';
-	return (expanded);
+	exp.expanded[exp.j] = '\0';
+	return (exp.expanded);
 }
 
 char	*expand_with_single_quotes(char *str, t_mini *shell)
 {
-	char	*expanded;
-	int		i;
-	int		j;
-	int		k;
-	int		in_single_quote;
-	char	var_name[256];
-	char	*var_value;
+	t_expand	exp;
+	int			in_single_quote;
 
+	init_expansion(&exp, str, shell);
 	in_single_quote = 0;
-	i = 0;
-	j = 0;
-	expanded = ft_calloc(1024, sizeof(char));
-	while (str[i])
+	while (exp.str[exp.i])
 	{
-		if (str[i] == '\'')
+		if (exp.str[exp.i] == '\'')
 		{
 			in_single_quote = !in_single_quote;
-			expanded[j++] = str[i++];
+			exp.expanded[exp.j++] = exp.str[exp.i++];
 		}
-		else if (str[i] == '$' && !in_single_quote)
-		{
-			i++;
-			k = 0;
-			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-				var_name[k++] = str[i++];
-			var_name[k] = '\0';
-			var_value = ft_getenv(var_name, shell->env_list);
-			if (var_value)
-			{
-				ft_strcpy(&expanded[j], var_value);
-				j += ft_strlen(var_value);
-			}
-		}
+		else if (exp.str[exp.i] == '$' && !in_single_quote)
+			exit_code_var(&exp, shell);
 		else
-			expanded[j++] = str[i++];
+			exp.expanded[exp.j++] = exp.str[exp.i++];
 	}
-	expanded[j] = '\0';
-	return (expanded);
+	exp.expanded[exp.j] = '\0';
+	return (exp.expanded);
 }
 
 void	expand_var(t_mini *shell)
@@ -98,18 +72,14 @@ void	expand_var(t_mini *shell)
 	while (current)
 	{
 		if (current->type == DOUBLE || current->type == VAR)
-		{
 			new_str = var_expansion(current->str, shell);
-			free(current->str);
-			current->str = new_str;
-		}
 		else if (current->type == PATH || current->type == ARG
 			|| current->type == CMD)
-		{
 			new_str = expand_with_single_quotes(current->str, shell);
-			free(current->str);
-			current->str = new_str;
-		}
+		else
+			new_str = ft_strdup(current->str);
+		free(current->str);
+		current->str = new_str;
 		current = current->next;
 	}
 }

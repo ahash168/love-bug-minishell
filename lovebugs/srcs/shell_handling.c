@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 19:49:32 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 19:50:47 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 19:24:35 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_shell(t_mini *shell)
 	shell->cmd_count = 0;
 	shell->pipe_fd[0] = 0;
 	shell->pipe_fd[1] = 0;
+	shell->exit_status = 0;
 }
 
 void	reset_shell(t_mini *shell)

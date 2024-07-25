@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	quote_checker(t_mini *shell)
+int	quote_checker(t_mini *shell)
 {
 	int	i;
 	int	double_quote_open;
@@ -31,9 +31,10 @@ void	quote_checker(t_mini *shell)
 	}
 	if (double_quote_open || single_quote_open)
 	{
-		fprintf(stderr, "Error: Unmatched quotes detected\n");
-		exit(1);
+		fd_printf(2, "minishell: error: unmatched quotes detected\n");
+		return (1);
 	}
+	return (0);
 }
 
 void	newstr_maker(t_token *current, char *new_str)

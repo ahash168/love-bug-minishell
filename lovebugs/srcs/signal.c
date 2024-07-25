@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 22:15:41 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 22:40:05 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 20:11:53 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_sigaction(t_mini *shell)
 {
 	t_sigaction	sa;
 
-	memset(&sa, 0, sizeof(sa));
+	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_sigaction = &signals_handler;
 	if (g_recived_signal == 1)
 	{

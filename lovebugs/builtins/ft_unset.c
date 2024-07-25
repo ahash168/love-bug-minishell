@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:06:22 by bgordag           #+#    #+#             */
-/*   Updated: 2024/07/24 16:01:33 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 22:14:47 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	check_valid_identifier_export(char *arg)
 		return (0);
 }
 
-int	check_unset_args(char *arg)
+int	check_unset_args(char *arg, t_mini *shell)
 {
 	if (!arg || !arg[0] || check_valid_identifier_export(arg))
 	{
-		g_exit_code = UNSET_FLAG;
+		shell->exit_status = UNSET_FLAG;
 		return (1);
 	}
 	return (0);
@@ -77,27 +77,27 @@ void	delete_env_list(char *arg, t_mini *mini)
 	free_single_env(temp);
 }
 
-void	ft_unset(char **args, t_mini *mini)
+void	ft_unset(char **args, t_mini *shell)
 {
 	int	i;
 
 	i = 1;
 	if (!args[1])
 	{
-		g_exit_code = 0;
+		shell->exit_status = 0;
 		return ;
 	}
 	while (args[i] != NULL)
 	{
-		if (check_unset_args(args[i]))
+		if (check_unset_args(args[i], shell))
 			fprintf(stderr, "minishell: unset: `%s': \
 			not a valid identifier\n", args[i]);
 		else
-			delete_env_list(args[i], mini);
+			delete_env_list(args[i], shell);
 		i++;
 	}
-	if (g_exit_code == UNSET_FLAG)
-		g_exit_code = UNSET_FAIL_CODE;
+	if (shell->exit_status == UNSET_FLAG)
+		shell->exit_status = UNSET_FAIL_CODE;
 	else
-		g_exit_code = 0;
+		shell->exit_status = 0;
 }

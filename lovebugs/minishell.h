@@ -6,7 +6,7 @@
 /*   By: ahashem <ahashem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:22:10 by ahashem           #+#    #+#             */
-/*   Updated: 2024/07/24 22:28:57 by ahashem          ###   ########.fr       */
+/*   Updated: 2024/07/25 23:56:23 by ahashem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,47 @@ int		strchar_count(char *str, char c);
 void	init_env(char **env, t_env **my_env, t_mini *shell);
 
 int		parsing(t_mini *shell);
+int		tokenizer(t_mini *shell);
 void	name_token(char *input, t_token *token);
-void	parse_tokens(t_mini *shell);
+int		parse_tokens(t_mini *shell);
 void	rename_tokens(t_mini *shell);
 void	join_tokens(t_mini *shell);
 void	expand_var(t_mini *shell);
 void	print_tokens(t_token *head);
 t_cmd	*cmd_maker(t_token *tokens);
 
-void	quote_checker(t_mini *shell);
+int		quote_checker(t_mini *shell);
 void	quote_remover(t_mini *shell);
+
+typedef struct s_expand
+{
+	char		*expanded;
+	const char	*str;
+	int			i;
+	int			j;
+	t_mini		*shell;
+}				t_expand;
+
+char	*extract_var_name(t_expand *exp);
+void	append_var_value(t_expand *exp, const char *var_value);
+void	get_env_var(t_expand *exp, t_mini *shell);
+void	init_expansion(t_expand *exp, char *str, t_mini *shell);
 
 void	init_cmds(t_mini *shell);
 void	print_cmds(t_cmd *head);
 void	init_redir(t_mini *shell);
 
+void	handle_heredoc(t_cmd *cmd, char *delim);
+void	handle_infile(t_cmd *cmd, t_token *token);
+void	handle_outfile(t_cmd *cmd, t_token *token);
+void	handle_appendfile(t_cmd *cmd, t_token *token);
+
 int		execution(t_mini *shell);
 char	**list_to_array(t_env *my_env);
 void	exec_single(t_mini *shell, t_cmd *cmds);
-void	set_redir(t_mini *shell, t_cmd *current);
+int		set_redir(t_mini *shell, t_cmd *current);
 char	**cmd_validator(char **cmd, char **env);
+char	**list_to_array(t_env *my_env);
 
 void	child(t_mini *shell, t_cmd *current);
 void	parent(t_mini *shell, t_cmd *current);
@@ -153,20 +174,12 @@ void	init_sigaction(t_mini *shell);
 #  define MAX_PATH 256
 # endif
 
-# define BUFF_SIZE 4096
 # define PWD_FAIL_CODE 2
 # define ENV_FAIL_CODE 1
 # define EXPORT_FAIL_CODE 1
 # define EXPORT_FLAG 654
 # define UNSET_FLAG 1
 # define UNSET_FAIL_CODE 2
-# define COMMAND_FAIL 127
-# define EXIT_FAIL 1
-# define EXIT_ALPHA_CODE 255
-# define CD_FAIL 1
-# define EXIST 0
-
-int		g_exit_code;
 
 int		ft_echo(char **input);
 int		ft_env(t_env *my_env);
@@ -179,7 +192,7 @@ void	ft_export(char **args, t_mini *mini);
 void	parse_new_export(char *arg, t_mini *mini);
 void	ft_modify_env(char *arg, t_mini *mini);
 t_env	*env_already_exist(char *arg, t_mini *mini);
-int		check_export_args(char *arg);
+int		check_export_args(char *arg, t_mini *shell);
 int		check_valid_identifier(char *arg);
 void	add_to_env(char *arg, t_mini *mini);
 char	*set_env_value(char *arg, t_env *new);

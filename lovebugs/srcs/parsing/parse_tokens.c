@@ -12,24 +12,47 @@
 
 #include "../../minishell.h"
 
-void	parse_redir(t_token *current)
+int	parse_redir(t_token *current)
 {
 	current = current->next;
 	if (!current)
 	{
-		printf("error: no next after redirection\n");
-		exit(1);
+		fd_printf(2, "minishell: syntax error near"
+			" unexpected token `newline'\n");
+		return (1);
 	}
 	if (current->type == SPACES)
 		current = current->next;
 	if (!current || current->type == REDIR || current->type == PIPE)
 	{
-		printf("error: wrong after space after redirection\n");
-		exit(1);
+		fd_printf(2, "minishell: syntax error near"
+			" unexpected token `newline'\n");
+		return (1);
 	}
+	return (0);
 }
 
-void	parse_tokens(t_mini *shell)
+int	parse_pipe(t_token *current)
+{
+	current = current->next;
+	if (!current)
+	{
+		fd_printf(2, "minishell: syntax error near"
+			" unexpected token `newline'\n");
+		return (1);
+	}
+	if (current->type == SPACES)
+		current = current->next;
+	if (!current || current->type == PIPE)
+	{
+		fd_printf(2, "minishell: syntax error near"
+			" unexpected token `newline'\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	parse_tokens(t_mini *shell)
 {
 	t_token	*current;
 
@@ -38,22 +61,15 @@ void	parse_tokens(t_mini *shell)
 	{
 		if (current->type == PIPE)
 		{
-			current = current->next;
-			if (!current)
-			{
-				printf("error: no next after pipe\n");
-				exit(1);
-			}
-			if (current->type == SPACES)
-				current = current->next;
-			if (!current || current->type == PIPE)
-			{
-				printf("error: wrong after space after pipe\n");
-				exit(1);
-			}
+			if (parse_pipe(current))
+				return (1);
 		}
 		else if (current->type == REDIR)
-			parse_redir(current);
+		{
+			if (parse_redir(current))
+				return (1);
+		}
 		current = current->next;
 	}
+	return (0);
 }
